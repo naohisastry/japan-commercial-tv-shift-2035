@@ -1,0 +1,3252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[TV-Shift2035] Japan Top 5 Commercial Broadcasters - Revenue Structure Transformation Simulation (2015-2035)</title>
+    <!-- Google Fonts: Outfit & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+/* styles.css */
+:root {
+    --bg-dark: #070913;
+    --panel-bg: rgba(16, 20, 38, 0.6);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f1f5f9;
+    --text-sub: #94a3b8;
+    --text-muted: #64748b;
+    
+    /* Neon gradients */
+    --color-broadcast: #3b82f6; /* Blue */
+    --color-related-digital: #06b6d4; /* Cyan */
+    --color-related-trad: #a855f7; /* Purple */
+    --color-related-total: #8b5cf6; /* Indigo */
+    --color-non-broadcast: #f59e0b; /* Amber */
+    --color-total: #10b981; /* Emerald */
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+/* Glowing backgrounds */
+.glow-bg-1 {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    top: -200px;
+    right: -100px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.glow-bg-2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+    bottom: 100px;
+    left: -100px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Container */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Glassmorphism panels */
+.glass-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: var(--transition);
+}
+
+.glass-panel:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.05);
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+}
+
+.logo-title h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-title p {
+    color: var(--text-sub);
+    font-size: 0.9rem;
+}
+
+.glass-select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-main);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.glass-select:focus {
+    border-color: var(--color-related-digital);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.glass-select option {
+    background: #0f1322;
+    color: var(--text-main);
+}
+
+/* KPI Cards */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.kpi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.kpi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-title {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kpi-icon {
+    font-size: 1.2rem;
+    opacity: 0.7;
+}
+
+.kpi-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.kpi-footer {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Charts Grid */
+.charts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-header h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.badge {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+.canvas-wrapper {
+    position: relative;
+    height: 380px;
+    width: 100%;
+}
+
+/* Insights Section */
+.insights-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.insights-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.insights-body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .insights-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+.insight-block {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 12px;
+    padding: 1.2rem;
+}
+
+.insight-block h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-related-digital);
+}
+
+.insight-block p {
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+}
+
+.insight-block.highlight {
+    background: rgba(99, 102, 241, 0.05);
+    border-color: rgba(99, 102, 241, 0.1);
+}
+
+.insight-block.highlight h3 {
+    color: #a5b4fc;
+}
+
+/* Table Section */
+.table-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.table-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.data-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-sub);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.data-table th:first-child, .data-table td:first-child {
+    text-align: left;
+}
+
+.data-table th:nth-child(2), .data-table td:nth-child(2) {
+    text-align: center;
+}
+
+.data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-main);
+}
+
+.data-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Table row highlight for Forecast */
+.data-table tr.forecast-row td {
+    color: #a5b4fc;
+    background: rgba(99, 102, 241, 0.02);
+}
+
+.data-table tr.forecast-row:hover td {
+    background: rgba(99, 102, 241, 0.04);
+}
+
+/* Venn Diagram Styles */
+.venn-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.venn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.venn-header h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.venn-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.glass-btn {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #a5b4fc;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    outline: none;
+}
+
+.glass-btn:hover {
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+}
+
+.slider-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.year-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-related-digital);
+    min-width: 55px;
+    text-align: right;
+}
+
+.glass-slider {
+    -webkit-appearance: none;
+    width: 180px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    transition: var(--transition);
+}
+
+.glass-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-related-digital);
+    cursor: pointer;
+    box-shadow: 0 0 8px var(--color-related-digital);
+    transition: var(--transition);
+}
+
+.glass-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.venn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#venn-svg {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+    display: block;
+    margin: 0 auto;
+}
+
+#venn-svg circle {
+    transition: r 0.4s cubic-bezier(0.4, 0, 0.2, 1), cx 0.4s cubic-bezier(0.4, 0, 0.2, 1), cy 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#venn-svg path {
+    transition: d 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#venn-svg text {
+    pointer-events: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    transition: x 0.4s cubic-bezier(0.4, 0, 0.2, 1), y 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+}
+
+/* Logic Accordion Styles */
+.logic-details {
+    margin-top: 0.6rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.8rem 1.2rem;
+    transition: var(--transition);
+}
+
+.logic-details[open] {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.logic-details summary {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #a5b4fc;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+.logic-details summary:hover {
+    color: #c7d2fe;
+}
+
+.details-content {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .logic-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.logic-col h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-related-digital);
+    margin-bottom: 0.8rem;
+}
+
+.logic-col ul {
+    list-style: none;
+}
+
+.logic-col li {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.logic-col li code {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    color: #f43f5e;
+    font-family: monospace;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-top: 0.2rem;
+}
+
+.logic-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.logic-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-sub);
+    font-weight: 600;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logic-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.logic-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Glass Checkbox Styles */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+}
+
+.glass-checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-sub);
+    user-select: none;
+    line-height: 20px;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.glass-checkbox-container:hover {
+    color: var(--text-main);
+}
+
+.glass-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.glass-checkbox-container:hover input ~ .checkmark {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-checkbox-container input:checked ~ .checkmark {
+    background-color: rgba(6, 182, 212, 0.2);
+    border-color: var(--color-related-digital);
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.glass-checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.glass-checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 4px;
+    height: 9px;
+    border: solid #06b6d4;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Dashboard Main Grid Layout (KPI Left, Venn Right) */
+.dashboard-main-grid {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.kpi-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+/* Compact KPI Cards inside Sidebar */
+.kpi-sidebar .kpi-card {
+    padding: 0.7rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.kpi-sidebar .kpi-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.kpi-sidebar .kpi-title {
+    font-size: 0.85rem;
+}
+
+/* Make container and header more compact to maximize above-the-fold space */
+.app-container {
+    padding: 1rem 1.5rem;
+    gap: 1rem;
+}
+
+.app-header {
+    padding-bottom: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* Sidebar Controls panel */
+.sidebar-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+}
+
+.sidebar-controls .control-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: stretch;
+    width: 100%;
+}
+
+.sidebar-controls .control-item label {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    font-weight: 500;
+}
+
+.sidebar-controls .glass-select {
+    width: 100%;
+}
+
+.sidebar-controls .check-item {
+    display: flex;
+    align-items: center;
+    padding-top: 0.1rem;
+}
+
+/* App Footer */
+.app-footer {
+    margin-top: 2rem;
+    padding: 1.5rem 0 1rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+</style>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Glowing Ambient Lights -->
+        <div class="glow-bg-1"></div>
+        <div class="glow-bg-2"></div>
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo-badge">🔮</div>
+                <div>
+                    <h1>Commercial TV Shift 2035</h1>
+                    <p class="subtitle">Japan Top 5 Commercial Broadcasters - Revenue Structure Transformation Simulation (Actual 2015 - Forecast 2035)</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main 2-Column Grid -->
+        <div class="dashboard-main-grid">
+            <!-- Left Sidebar: Controls & KPIs -->
+            <aside class="kpi-sidebar">
+                <!-- Sidebar Controls: Station selector & Common scale -->
+                <div class="sidebar-controls glass-panel">
+                    <div class="control-item">
+                        <label for="station-select">Select Broadcaster</label>
+                        <select id="station-select" class="glass-select">
+                            <option value="ALL">Top 5 Broadcasters Total</option>
+                            <option value="NTV">Nippon TV HD (NTV)</option>
+                            <option value="EX">TV Asahi HD (EX)</option>
+                            <option value="TBS">TBS HD (TBS)</option>
+                            <option value="TX">TV Tokyo HD (TX)</option>
+                            <option value="CX">Fuji Media HD (CX)</option>
+                        </select>
+                    </div>
+                    <div class="control-item check-item">
+                        <label class="glass-checkbox">
+                            <input type="checkbox" id="common-scale-check">
+                            <span class="checkmark"></span>
+                            Common Scale Mode (Top 5 Base)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- KPI Card 1: 2035 Total Revenue -->
+                <div class="kpi-card glass-panel highlight-emerald">
+                    <div class="kpi-header">
+                        <span class="kpi-title">2035 Forecast Consolidated Revenue</span>
+                        <span class="kpi-icon">💰</span>
+                    </div>
+                    <div class="kpi-value text-emerald" id="kpi-total-rev">--</div>
+                    <div class="kpi-footer" id="kpi-total-diff">vs 2015: --</div>
+                </div>
+
+                <!-- KPI Card 2: 2035 Broadcasting Share -->
+                <div class="kpi-card glass-panel highlight-blue">
+                    <div class="kpi-header">
+                        <span class="kpi-title">2035 Linear TV Ad Share</span>
+                        <span class="kpi-icon">📡</span>
+                    </div>
+                    <div class="kpi-value text-blue" id="kpi-broadcast-ratio">--</div>
+                    <div class="kpi-footer" id="kpi-broadcast-diff">vs 2015: --</div>
+                </div>
+
+                <!-- KPI Card 3: 2035 Related (Digital) Share -->
+                <div class="kpi-card glass-panel highlight-cyan">
+                    <div class="kpi-header">
+                        <span class="kpi-title">2035 Related Share (incl. Digital)</span>
+                        <span class="kpi-icon">⚡</span>
+                    </div>
+                    <div class="kpi-value text-cyan" id="kpi-related-ratio">--</div>
+                    <div class="kpi-footer" id="kpi-related-diff">vs 2015: --</div>
+                </div>
+            </aside>
+
+            <!-- Right Area: Venn Diagram Section -->
+            <section class="venn-section glass-panel">
+                <div class="venn-header">
+                    <h2>🔮 3 Core Business Synergy Shift</h2>
+                    <div class="venn-controls">
+                        <button id="play-btn" class="glass-btn">▶ Play</button>
+                        <button id="download-btn" class="glass-btn">📸 Download PNG</button>
+                        <div class="slider-group">
+                            <span class="year-label" id="slider-year-val">2015</span>
+                            <input type="range" id="year-slider" min="2015" max="2035" value="2015" class="glass-slider">
+                        </div>
+                    </div>
+                </div>
+                <div class="venn-container">
+                    <!-- SVG for Venn circles -->
+                    <svg id="venn-svg" width="500" height="390" viewBox="0 0 500 390">
+                        <!-- Definitions for Gradients and Filters -->
+                        <defs>
+                            <linearGradient id="grad-broadcast" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <linearGradient id="grad-related" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#0891b2" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <linearGradient id="grad-nonbroadcast" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#d97706" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="6" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        <!-- Circles -->
+                        <circle id="circle-broadcast" cx="190" cy="150" r="0" fill="url(#grad-broadcast)" stroke="#3b82f6" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
+                        <circle id="circle-related" cx="310" cy="150" r="0" fill="url(#grad-related)" stroke="#06b6d4" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
+                        <circle id="circle-nonbroadcast" cx="250" cy="240" r="0" fill="url(#grad-nonbroadcast)" stroke="#f59e0b" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
+
+                        <!-- Leader Lines (引き出し線) -->
+                        <path id="path-bc" d="" stroke="#3b82f6" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3,3"/>
+                        <path id="path-rel" d="" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3,3"/>
+                        <path id="path-nb" d="" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3,3"/>
+
+                        <!-- Labels for pull-out details -->
+                        <text id="venn-bc-name" x="25" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">Broadcasting (Linear)</text>
+                        <text id="venn-bc-num" x="25" y="0" fill="#60a5fa" font-size="14" font-weight="bold" text-anchor="start">0 Billion</text>
+                        
+                        <text id="venn-rel-name" x="475" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">Broadcast-Related (Digital & IP)</text>
+                        <text id="venn-rel-num" x="475" y="0" fill="#22d3ee" font-size="14" font-weight="bold" text-anchor="end">0 Billion</text>
+                        
+                        <text id="venn-nb-name" x="250" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">Non-Broadcasting</text>
+                        <text id="venn-nb-num" x="250" y="0" fill="#fbbf24" font-size="14" font-weight="bold" text-anchor="middle">0 Billion</text>
+                    </svg>
+                </div>
+
+                <!-- Distance Calculation & Methodology Evidence Accordion -->
+                <details class="methodology-accordion">
+                    <summary>💡 View Venn Distance Calculation Logic & Station-Specific Exclusions (Evidence)</summary>
+                    <div class="accordion-content">
+                        <div class="logic-explainer">
+                            <h4>1. Pure Mathematical Dynamic Distance Control Logic</h4>
+                            <p>To eliminate arbitrary visual positioning, circle positions and overlap distances are calculated dynamically using 100% actual and forecast metrics:</p>
+                            <ul>
+                                <li><strong>Broadcasting ⇔ Broadcast-Related (Horizontal Overlap)</strong>: Driven by the <em>Digital Ratio within Related Segment</em> ($= \frac{\text{Digital Revenue}}{\text{Related Total}}$). As digital streaming (TVer/SVOD) expands over time, the blue and cyan circles merge deeper together.</li>
+                                <li><strong>Broadcast-Related ⇔ Non-Broadcasting (Vertical Distance)</strong>: Driven by the <em>Non-Synergy Ratio</em> ($= \frac{\text{Non-Media Non-Synergy Revenue}}{\text{Non-Broadcasting Total}}$). Broadcasters with large non-media operations (e.g. Fuji Sankei Building real estate, TBS PLAZA retail) have their amber circle automatically pushed downward into an isolated position.</li>
+                            </ul>
+                            
+                            <h4>2. Evidence: Disclosed Non-Broadcasting Non-Synergy Segments</h4>
+                            <p>Non-media segments extracted from statutory annual securities reports (Yuka Shoken Hokokusho):</p>
+                            <div class="table-mini-wrapper">
+                                <table class="table-mini">
+                                    <thead>
+                                        <tr>
+                                            <th>Broadcaster</th>
+                                            <th>Exclusion Line Items (Non-Broadcasting / Non-Synergy)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Nippon TV HD</strong></td>
+                                            <td>Wellness & Fitness business (TIPNESS gym operations)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>TV Asahi HD</strong></td>
+                                            <td>Leasing & Real Estate management (Roppongi Hills & property lease revenues)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>TBS HD</strong></td>
+                                            <td>Real Estate operations (Akasaka Sacas) + Lifestyle retail (PLAZA / B&L) + Educational services (Yaruki Switch)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>TV Tokyo HD</strong></td>
+                                            <td>Real estate leasing operations (minimal pure non-media footprint)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Fuji Media HD</strong></td>
+                                            <td>Urban Development (Sankei Building) + Tourism & Hospitality (Granvista Hotels & Resorts)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+            </section>
+        </div>
+
+        <!-- Charts Area -->
+        <section class="charts-container">
+            <div class="chart-box glass-panel">
+                <div class="chart-header">
+                    <h2>Revenue Composition by Segment (JPY Millions)</h2>
+                    <div class="badge">Actual + Forecast (2026/27 Boundary)</div>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="areaChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-box glass-panel">
+                <div class="chart-header">
+                    <h2>Revenue Share Transition (%)</h2>
+                    <div class="badge">Structural Shift</div>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="ratioChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis & Insights -->
+        <section class="insights-section glass-panel">
+            <div class="insights-header">
+                <h2 id="insights-title">💡 Top 5 Broadcasters Total Strategic Insights & Alignment</h2>
+            </div>
+            <div class="insights-body">
+                <div class="insight-block highlight">
+                    <p id="station-insight-text">Loading...</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Table Area -->
+        <section class="table-section glass-panel">
+            <div class="table-header">
+                <h2>📊 Detailed Numerical Data Table</h2>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table" id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Fiscal Year</th>
+                            <th>Category</th>
+                            <th>Broadcasting (Linear)</th>
+                            <th>Broadcast-Related (Total)</th>
+                            <th>├ Digital (TVer/SVOD)</th>
+                            <th>├ Traditional Peripheral</th>
+                            <th>Non-Broadcasting</th>
+                            <th>Consolidated Net Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Generated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>© 2026 Naohisa Hashimoto’S Update date:2026/07/07</p>
+        </footer>
+    </div>
+    
+    <script>
+const FORECAST_DATA = [
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 226400.0,
+    "放送関連事業_総額（百万円）": 132427.0,
+    "放送関連事業_内デジタル（百万円）": 15380.8,
+    "放送関連事業_内従来周辺（百万円）": 117046.2,
+    "放送外事業_総額（百万円）": 49226.0,
+    "放送外事業_内非シナジー（百万円）": 23749.0,
+    "連結営業収益_総売上高（百万円）": 408053.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 225300.0,
+    "放送関連事業_総額（百万円）": 151911.0,
+    "放送関連事業_内デジタル（百万円）": 22314.5,
+    "放送関連事業_内従来周辺（百万円）": 129596.5,
+    "放送外事業_総額（百万円）": 56326.0,
+    "放送外事業_内非シナジー（百万円）": 27174.0,
+    "連結営業収益_総売上高（百万円）": 433537.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 222200.0,
+    "放送関連事業_総額（百万円）": 153507.0,
+    "放送関連事業_内デジタル（百万円）": 27660.2,
+    "放送関連事業_内従来周辺（百万円）": 125846.8,
+    "放送外事業_総額（百万円）": 56587.0,
+    "放送外事業_内非シナジー（百万円）": 27300.0,
+    "連結営業収益_総売上高（百万円）": 432294.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 213400.0,
+    "放送関連事業_総額（百万円）": 156522.0,
+    "放送関連事業_内デジタル（百万円）": 32996.4,
+    "放送関連事業_内従来周辺（百万円）": 123525.6,
+    "放送外事業_総額（百万円）": 57532.0,
+    "放送外事業_内非シナジー（百万円）": 27756.0,
+    "連結営業収益_総売上高（百万円）": 427454.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 207700.0,
+    "放送関連事業_総額（百万円）": 158285.0,
+    "放送関連事業_内デジタル（百万円）": 38823.7,
+    "放送関連事業_内従来周辺（百万円）": 119461.3,
+    "放送外事業_総額（百万円）": 57706.0,
+    "放送外事業_内非シナジー（百万円）": 27840.0,
+    "連結営業収益_総売上高（百万円）": 423691.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 196300.0,
+    "放送関連事業_総額（百万円）": 151569.0,
+    "放送関連事業_内デジタル（百万円）": 44809.9,
+    "放送関連事業_内従来周辺（百万円）": 106759.1,
+    "放送外事業_総額（百万円）": 47161.0,
+    "放送外事業_内非シナジー（百万円）": 17178.0,
+    "連結営業収益_総売上高（百万円）": 395030.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 170300.0,
+    "放送関連事業_総額（百万円）": 141354.0,
+    "放送関連事業_内デジタル（百万円）": 47506.4,
+    "放送関連事業_内従来周辺（百万円）": 93847.6,
+    "放送外事業_総額（百万円）": 43261.0,
+    "放送外事業_内非シナジー（百万円）": 15757.0,
+    "連結営業収益_総売上高（百万円）": 354915.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 176300.0,
+    "放送関連事業_総額（百万円）": 157284.0,
+    "放送関連事業_内デジタル（百万円）": 55770.7,
+    "放送関連事業_内従来周辺（百万円）": 101513.3,
+    "放送外事業_総額（百万円）": 55187.0,
+    "放送外事業_内非シナジー（百万円）": 26624.0,
+    "連結営業収益_総売上高（百万円）": 388771.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 168800.0,
+    "放送関連事業_総額（百万円）": 162323.0,
+    "放送関連事業_内デジタル（百万円）": 63238.8,
+    "放送関連事業_内従来周辺（百万円）": 99084.2,
+    "放送外事業_総額（百万円）": 56217.0,
+    "放送外事業_内非シナジー（百万円）": 27121.0,
+    "連結営業収益_総売上高（百万円）": 387340.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 219026.0,
+    "放送関連事業_総額（百万円）": 161211.0,
+    "放送関連事業_内デジタル（百万円）": 64264.4,
+    "放送関連事業_内従来周辺（百万円）": 96946.6,
+    "放送外事業_総額（百万円）": 57513.0,
+    "放送外事業_内非シナジー（百万円）": 27746.0,
+    "連結営業収益_総売上高（百万円）": 437750.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 221963.0,
+    "放送関連事業_総額（百万円）": 177358.0,
+    "放送関連事業_内デジタル（百万円）": 76449.3,
+    "放送関連事業_内従来周辺（百万円）": 100908.7,
+    "放送外事業_総額（百万円）": 62727.0,
+    "放送外事業_内非シナジー（百万円）": 30262.0,
+    "連結営業収益_総売上高（百万円）": 462048.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 231746.0,
+    "放送関連事業_総額（百万円）": 186859.0,
+    "放送関連事業_内デジタル（百万円）": 86088.4,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 65785.0,
+    "放送外事業_内非シナジー（百万円）": 31738.0,
+    "連結営業収益_総売上高（百万円）": 484390.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 227574.6,
+    "放送関連事業_総額（百万円）": 193746.1,
+    "放送関連事業_内デジタル（百万円）": 92975.5,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 66113.9,
+    "放送外事業_内非シナジー（百万円）": 31896.7,
+    "連結営業収益_総売上高（百万円）": 487434.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 223478.2,
+    "放送関連事業_総額（百万円）": 201184.1,
+    "放送関連事業_内デジタル（百万円）": 100413.5,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 66444.5,
+    "放送外事業_内非シナジー（百万円）": 32056.2,
+    "連結営業収益_総売上高（百万円）": 491106.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 219455.6,
+    "放送関連事業_総額（百万円）": 209217.2,
+    "放送関連事業_内デジタル（百万円）": 108446.6,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 66776.7,
+    "放送外事業_内非シナジー（百万円）": 32216.5,
+    "連結営業収益_総売上高（百万円）": 495449.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 215505.4,
+    "放送関連事業_総額（百万円）": 217892.9,
+    "放送関連事業_内デジタル（百万円）": 117122.3,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 67110.6,
+    "放送外事業_内非シナジー（百万円）": 32377.5,
+    "連結営業収益_総売上高（百万円）": 500508.9,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 211626.3,
+    "放送関連事業_総額（百万円）": 227262.7,
+    "放送関連事業_内デジタル（百万円）": 126492.1,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 67446.2,
+    "放送外事業_内非シナジー（百万円）": 32539.4,
+    "連結営業収益_総売上高（百万円）": 506335.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 207817.0,
+    "放送関連事業_総額（百万円）": 237382.1,
+    "放送関連事業_内デジタル（百万円）": 136611.5,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 67783.4,
+    "放送外事業_内非シナジー（百万円）": 32702.1,
+    "連結営業収益_総売上高（百万円）": 512982.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 204076.3,
+    "放送関連事業_総額（百万円）": 248311.0,
+    "放送関連事業_内デジタル（百万円）": 147540.4,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 68122.3,
+    "放送外事業_内非シナジー（百万円）": 32865.6,
+    "連結営業収益_総売上高（百万円）": 520509.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 200403.0,
+    "放送関連事業_総額（百万円）": 260114.2,
+    "放送関連事業_内デジタル（百万円）": 159343.6,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 68462.9,
+    "放送外事業_内非シナジー（百万円）": 33030.0,
+    "連結営業収益_総売上高（百万円）": 528980.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "NTV",
+    "放送局名": "日本テレビHD",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 196795.7,
+    "放送関連事業_総額（百万円）": 272861.7,
+    "放送関連事業_内デジタル（百万円）": 172091.1,
+    "放送関連事業_内従来周辺（百万円）": 100770.6,
+    "放送外事業_総額（百万円）": 68805.2,
+    "放送外事業_内非シナジー（百万円）": 33195.1,
+    "連結営業収益_総売上高（百万円）": 538462.7,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 180700.0,
+    "放送関連事業_総額（百万円）": 53529.0,
+    "放送関連事業_内デジタル（百万円）": 3058.0,
+    "放送関連事業_内従来周辺（百万円）": 50471.0,
+    "放送外事業_総額（百万円）": 60317.0,
+    "放送外事業_内非シナジー（百万円）": 2534.0,
+    "連結営業収益_総売上高（百万円）": 294546.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 179400.0,
+    "放送関連事業_総額（百万円）": 55845.0,
+    "放送関連事業_内デジタル（百万円）": 4588.0,
+    "放送関連事業_内従来周辺（百万円）": 51257.0,
+    "放送外事業_総額（百万円）": 61256.0,
+    "放送外事業_内非シナジー（百万円）": 2573.0,
+    "連結営業収益_総売上高（百万円）": 296501.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 181300.0,
+    "放送関連事業_総額（百万円）": 60132.0,
+    "放送関連事業_内デジタル（百万円）": 6118.0,
+    "放送関連事業_内従来周辺（百万円）": 54014.0,
+    "放送外事業_総額（百万円）": 64550.0,
+    "放送外事業_内非シナジー（百万円）": 2712.0,
+    "連結営業収益_総売上高（百万円）": 305982.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 177300.0,
+    "放送関連事業_総額（百万円）": 63178.0,
+    "放送関連事業_内デジタル（百万円）": 7954.0,
+    "放送関連事業_内従来周辺（百万円）": 55224.0,
+    "放送外事業_総額（百万円）": 65998.0,
+    "放送外事業_内非シナジー（百万円）": 2773.0,
+    "連結営業収益_総売上高（百万円）": 306476.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 172800.0,
+    "放送関連事業_総額（百万円）": 66709.0,
+    "放送関連事業_内デジタル（百万円）": 11625.0,
+    "放送関連事業_内従来周辺（百万円）": 55084.0,
+    "放送外事業_総額（百万円）": 65831.0,
+    "放送外事業_内非シナジー（百万円）": 2766.0,
+    "連結営業収益_総売上高（百万円）": 305340.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 162500.0,
+    "放送関連事業_総額（百万円）": 67372.0,
+    "放送関連事業_内デジタル（百万円）": 13767.0,
+    "放送関連事業_内従来周辺（百万円）": 53605.0,
+    "放送外事業_総額（百万円）": 64061.0,
+    "放送外事業_内非シナジー（百万円）": 2691.0,
+    "連結営業収益_総売上高（百万円）": 293933.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 144700.0,
+    "放送関連事業_総額（百万円）": 66039.0,
+    "放送関連事業_内デジタル（百万円）": 17744.0,
+    "放送関連事業_内従来周辺（百万円）": 48295.0,
+    "放送外事業_総額（百万円）": 57718.0,
+    "放送外事業_内非シナジー（百万円）": 2425.0,
+    "連結営業収益_総売上高（百万円）": 268457.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 158600.0,
+    "放送関連事業_総額（百万円）": 76480.0,
+    "放送関連事業_内デジタル（百万円）": 22028.0,
+    "放送関連事業_内従来周辺（百万円）": 54452.0,
+    "放送外事業_総額（百万円）": 65074.0,
+    "放送外事業_内非シナジー（百万円）": 2734.0,
+    "連結営業収益_総売上高（百万円）": 300154.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 152400.0,
+    "放送関連事業_総額（百万円）": 83441.0,
+    "放送関連事業_内デジタル（百万円）": 27841.0,
+    "放送関連事業_内従来周辺（百万円）": 55600.0,
+    "放送外事業_総額（百万円）": 66445.0,
+    "放送外事業_内非シナジー（百万円）": 2791.0,
+    "連結営業収益_総売上高（百万円）": 302286.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 166893.0,
+    "放送関連事業_総額（百万円）": 85273.0,
+    "放送関連事業_内デジタル（百万円）": 29065.0,
+    "放送関連事業_内従来周辺（百万円）": 56208.0,
+    "放送外事業_総額（百万円）": 67173.0,
+    "放送外事業_内非シナジー（百万円）": 2822.0,
+    "連結営業収益_総売上高（百万円）": 319339.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 174346.0,
+    "放送関連事業_総額（百万円）": 94952.0,
+    "放送関連事業_内デジタル（百万円）": 35795.0,
+    "放送関連事業_内従来周辺（百万円）": 59157.0,
+    "放送外事業_総額（百万円）": 70698.0,
+    "放送外事業_内非シナジー（百万円）": 2970.0,
+    "連結営業収益_総売上高（百万円）": 339996.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 186772.0,
+    "放送関連事業_総額（百万円）": 98063.0,
+    "放送関連事業_内デジタル（百万円）": 36087.0,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 74066.0,
+    "放送外事業_内非シナジー（百万円）": 3112.0,
+    "連結営業収益_総売上高（百万円）": 358901.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 183410.1,
+    "放送関連事業_総額（百万円）": 100589.1,
+    "放送関連事業_内デジタル（百万円）": 38613.1,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 74436.3,
+    "放送外事業_内非シナジー（百万円）": 3127.6,
+    "連結営業収益_総売上高（百万円）": 358435.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 180108.7,
+    "放送関連事業_総額（百万円）": 103292.0,
+    "放送関連事業_内デジタル（百万円）": 41316.0,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 74808.5,
+    "放送外事業_内非シナジー（百万円）": 3143.2,
+    "連結営業収益_総売上高（百万円）": 358209.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 176866.8,
+    "放送関連事業_総額（百万円）": 106184.1,
+    "放送関連事業_内デジタル（百万円）": 44208.1,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 75182.6,
+    "放送外事業_内非シナジー（百万円）": 3158.9,
+    "連結営業収益_総売上高（百万円）": 358233.4,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 173683.2,
+    "放送関連事業_総額（百万円）": 109278.7,
+    "放送関連事業_内デジタル（百万円）": 47302.7,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 75558.5,
+    "放送外事業_内非シナジー（百万円）": 3174.7,
+    "連結営業収益_総売上高（百万円）": 358520.3,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 170556.9,
+    "放送関連事業_総額（百万円）": 112589.9,
+    "放送関連事業_内デジタル（百万円）": 50613.9,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 75936.3,
+    "放送外事業_内非シナジー（百万円）": 3190.6,
+    "連結営業収益_総売上高（百万円）": 359083.0,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 167486.8,
+    "放送関連事業_総額（百万円）": 116132.9,
+    "放送関連事業_内デジタル（百万円）": 54156.9,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 76315.9,
+    "放送外事業_内非シナジー（百万円）": 3206.5,
+    "連結営業収益_総売上高（百万円）": 359935.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 164472.1,
+    "放送関連事業_総額（百万円）": 119923.8,
+    "放送関連事業_内デジタル（百万円）": 57947.8,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 76697.5,
+    "放送外事業_内非シナジー（百万円）": 3222.6,
+    "連結営業収益_総売上高（百万円）": 361093.4,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 161511.6,
+    "放送関連事業_総額（百万円）": 123980.2,
+    "放送関連事業_内デジタル（百万円）": 62004.2,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 77081.0,
+    "放送外事業_内非シナジー（百万円）": 3238.7,
+    "連結営業収益_総売上高（百万円）": 362572.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "EX",
+    "放送局名": "テレビ朝日HD",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 158604.4,
+    "放送関連事業_総額（百万円）": 128320.5,
+    "放送関連事業_内デジタル（百万円）": 66344.5,
+    "放送関連事業_内従来周辺（百万円）": 61976.0,
+    "放送外事業_総額（百万円）": 77466.4,
+    "放送外事業_内非シナジー（百万円）": 3254.9,
+    "連結営業収益_総売上高（百万円）": 364391.3,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 175400.0,
+    "放送関連事業_総額（百万円）": 99025.0,
+    "放送関連事業_内デジタル（百万円）": 8841.0,
+    "放送関連事業_内従来周辺（百万円）": 90184.0,
+    "放送外事業_総額（百万円）": 94128.0,
+    "放送外事業_内非シナジー（百万円）": 94128.0,
+    "連結営業収益_総売上高（百万円）": 368553.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 173900.0,
+    "放送関連事業_総額（百万円）": 99828.0,
+    "放送関連事業_内デジタル（百万円）": 9457.0,
+    "放送関連事業_内従来周辺（百万円）": 90371.0,
+    "放送外事業_総額（百万円）": 94324.0,
+    "放送外事業_内非シナジー（百万円）": 94324.0,
+    "連結営業収益_総売上高（百万円）": 368052.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 175600.0,
+    "放送関連事業_総額（百万円）": 102348.0,
+    "放送関連事業_内デジタル（百万円）": 10207.0,
+    "放送関連事業_内従来周辺（百万円）": 92141.0,
+    "放送外事業_総額（百万円）": 96170.0,
+    "放送外事業_内非シナジー（百万円）": 96170.0,
+    "連結営業収益_総売上高（百万円）": 374118.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 171900.0,
+    "放送関連事業_総額（百万円）": 104901.0,
+    "放送関連事業_内デジタル（百万円）": 11052.0,
+    "放送関連事業_内従来周辺（百万円）": 93849.0,
+    "放送外事業_総額（百万円）": 97953.0,
+    "放送外事業_内非シナジー（百万円）": 97953.0,
+    "連結営業収益_総売上高（百万円）": 374754.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 169000.0,
+    "放送関連事業_総額（百万円）": 107538.0,
+    "放送関連事業_内デジタル（百万円）": 12548.0,
+    "放送関連事業_内従来周辺（百万円）": 94990.0,
+    "放送外事業_総額（百万円）": 99144.0,
+    "放送外事業_内非シナジー（百万円）": 99144.0,
+    "連結営業収益_総売上高（百万円）": 375682.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 157100.0,
+    "放送関連事業_総額（百万円）": 97469.0,
+    "放送関連事業_内デジタル（百万円）": 13638.0,
+    "放送関連事業_内従来周辺（百万円）": 83831.0,
+    "放送外事業_総額（百万円）": 96558.0,
+    "放送外事業_内非シナジー（百万円）": 96558.0,
+    "連結営業収益_総売上高（百万円）": 351127.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 135500.0,
+    "放送関連事業_総額（百万円）": 90776.0,
+    "放送関連事業_内デジタル（百万円）": 14255.0,
+    "放送関連事業_内従来周辺（百万円）": 76521.0,
+    "放送外事業_総額（百万円）": 88138.0,
+    "放送外事業_内非シナジー（百万円）": 88138.0,
+    "連結営業収益_総売上高（百万円）": 314414.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 147500.0,
+    "放送関連事業_総額（百万円）": 110264.0,
+    "放送関連事業_内デジタル（百万円）": 17371.0,
+    "放送関連事業_内従来周辺（百万円）": 92893.0,
+    "放送外事業_総額（百万円）": 96957.0,
+    "放送外事業_内非シナジー（百万円）": 96957.0,
+    "連結営業収益_総売上高（百万円）": 354721.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 142200.0,
+    "放送関連事業_総額（百万円）": 115938.0,
+    "放送関連事業_内デジタル（百万円）": 20487.0,
+    "放送関連事業_内従来周辺（百万円）": 95451.0,
+    "放送外事業_総額（百万円）": 99626.0,
+    "放送外事業_内非シナジー（百万円）": 99626.0,
+    "連結営業収益_総売上高（百万円）": 357764.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 159357.0,
+    "放送関連事業_総額（百万円）": 119142.0,
+    "放送関連事業_内デジタル（百万円）": 16903.0,
+    "放送関連事業_内従来周辺（百万円）": 102239.0,
+    "放送外事業_総額（百万円）": 106709.0,
+    "放送外事業_内非シナジー（百万円）": 106709.0,
+    "連結営業収益_総売上高（百万円）": 385208.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 163619.0,
+    "放送関連事業_総額（百万円）": 126435.0,
+    "放送関連事業_内デジタル（百万円）": 20983.0,
+    "放送関連事業_内従来周辺（百万円）": 105452.0,
+    "放送外事業_総額（百万円）": 110063.0,
+    "放送外事業_内非シナジー（百万円）": 110063.0,
+    "連結営業収益_総売上高（百万円）": 400117.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 176063.0,
+    "放送関連事業_総額（百万円）": 133805.0,
+    "放送関連事業_内デジタル（百万円）": 23646.0,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 114977.0,
+    "放送外事業_内非シナジー（百万円）": 114977.0,
+    "連結営業収益_総売上高（百万円）": 424845.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 172893.9,
+    "放送関連事業_総額（百万円）": 135223.8,
+    "放送関連事業_内デジタル（百万円）": 25064.8,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 115551.9,
+    "放送外事業_内非シナジー（百万円）": 115551.9,
+    "連結営業収益_総売上高（百万円）": 423669.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 169781.8,
+    "放送関連事業_総額（百万円）": 136727.6,
+    "放送関連事業_内デジタル（百万円）": 26568.6,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 116129.6,
+    "放送外事業_内非シナジー（百万円）": 116129.6,
+    "連結営業収益_総売上高（百万円）": 422639.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 166725.7,
+    "放送関連事業_総額（百万円）": 138321.8,
+    "放送関連事業_内デジタル（百万円）": 28162.8,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 116710.3,
+    "放送外事業_内非シナジー（百万円）": 116710.3,
+    "連結営業収益_総売上高（百万円）": 421757.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 163724.6,
+    "放送関連事業_総額（百万円）": 140011.5,
+    "放送関連事業_内デジタル（百万円）": 29852.5,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 117293.8,
+    "放送外事業_内非シナジー（百万円）": 117293.8,
+    "連結営業収益_総売上高（百万円）": 421030.0,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 160777.6,
+    "放送関連事業_総額（百万円）": 141802.7,
+    "放送関連事業_内デジタル（百万円）": 31643.7,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 117880.3,
+    "放送外事業_内非シナジー（百万円）": 117880.3,
+    "連結営業収益_総売上高（百万円）": 420460.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 157883.6,
+    "放送関連事業_総額（百万円）": 143701.3,
+    "放送関連事業_内デジタル（百万円）": 33542.3,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 118469.7,
+    "放送外事業_内非シナジー（百万円）": 118469.7,
+    "連結営業収益_総売上高（百万円）": 420054.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 155041.7,
+    "放送関連事業_総額（百万円）": 145713.8,
+    "放送関連事業_内デジタル（百万円）": 35554.8,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 119062.1,
+    "放送外事業_内非シナジー（百万円）": 119062.1,
+    "連結営業収益_総売上高（百万円）": 419817.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 152250.9,
+    "放送関連事業_総額（百万円）": 147847.1,
+    "放送関連事業_内デジタル（百万円）": 37688.1,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 119657.4,
+    "放送外事業_内非シナジー（百万円）": 119657.4,
+    "連結営業収益_総売上高（百万円）": 419755.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TBS",
+    "放送局名": "TBS HD",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 149510.4,
+    "放送関連事業_総額（百万円）": 150108.4,
+    "放送関連事業_内デジタル（百万円）": 39949.4,
+    "放送関連事業_内従来周辺（百万円）": 110159.0,
+    "放送外事業_総額（百万円）": 120255.7,
+    "放送外事業_内非シナジー（百万円）": 120255.7,
+    "連結営業収益_総売上高（百万円）": 419874.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 77300.0,
+    "放送関連事業_総額（百万円）": 56978.0,
+    "放送関連事業_内デジタル（百万円）": 31225.0,
+    "放送関連事業_内従来周辺（百万円）": 25753.0,
+    "放送外事業_総額（百万円）": 12737.0,
+    "放送外事業_内非シナジー（百万円）": 2090.0,
+    "連結営業収益_総売上高（百万円）": 147015.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 76700.0,
+    "放送関連事業_総額（百万円）": 60934.0,
+    "放送関連事業_内デジタル（百万円）": 33670.0,
+    "放送関連事業_内従来周辺（百万円）": 27264.0,
+    "放送外事業_総額（百万円）": 13484.0,
+    "放送外事業_内非シナジー（百万円）": 2212.0,
+    "連結営業収益_総売上高（百万円）": 151118.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 77599.0,
+    "放送関連事業_総額（百万円）": 64310.0,
+    "放送関連事業_内デジタル（百万円）": 35752.0,
+    "放送関連事業_内従来周辺（百万円）": 28558.0,
+    "放送外事業_総額（百万円）": 14123.0,
+    "放送外事業_内非シナジー（百万円）": 2317.0,
+    "連結営業収益_総売上高（百万円）": 156032.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 75100.0,
+    "放送関連事業_総額（百万円）": 66939.0,
+    "放送関連事業_内デジタル（百万円）": 37497.0,
+    "放送関連事業_内従来周辺（百万円）": 29442.0,
+    "放送外事業_総額（百万円）": 14562.0,
+    "放送外事業_内非シナジー（百万円）": 2389.0,
+    "連結営業収益_総売上高（百万円）": 156601.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 73700.0,
+    "放送関連事業_総額（百万円）": 68659.0,
+    "放送関連事業_内デジタル（百万円）": 38789.0,
+    "放送関連事業_内従来周辺（百万円）": 29870.0,
+    "放送外事業_総額（百万円）": 14772.0,
+    "放送外事業_内非シナジー（百万円）": 2424.0,
+    "連結営業収益_総売上高（百万円）": 157131.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 69000.0,
+    "放送関連事業_総額（百万円）": 66749.0,
+    "放送関連事業_内デジタル（百万円）": 38393.0,
+    "放送関連事業_内従来周辺（百万円）": 28356.0,
+    "放送外事業_総額（百万円）": 14371.0,
+    "放送外事業_内非シナジー（百万円）": 2358.0,
+    "連結営業収益_総売上高（百万円）": 150120.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 63200.0,
+    "放送関連事業_総額（百万円）": 64983.0,
+    "放送関連事業_内デジタル（百万円）": 37815.0,
+    "放送関連事業_内従来周辺（百万円）": 27168.0,
+    "放送外事業_総額（百万円）": 13768.0,
+    "放送外事業_内非シナジー（百万円）": 2259.0,
+    "連結営業収益_総売上高（百万円）": 141951.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 68700.0,
+    "放送関連事業_総額（百万円）": 70884.0,
+    "放送関連事業_内デジタル（百万円）": 41247.0,
+    "放送関連事業_内従来周辺（百万円）": 29637.0,
+    "放送外事業_総額（百万円）": 14658.0,
+    "放送外事業_内非シナジー（百万円）": 2405.0,
+    "連結営業収益_総売上高（百万円）": 154242.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 65600.0,
+    "放送関連事業_総額（百万円）": 73439.0,
+    "放送関連事業_内デジタル（百万円）": 43223.0,
+    "放送関連事業_内従来周辺（百万円）": 30216.0,
+    "放送外事業_総額（百万円）": 14944.0,
+    "放送外事業_内非シナジー（百万円）": 2452.0,
+    "連結営業収益_総売上高（百万円）": 153983.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 69487.0,
+    "放送関連事業_総額（百万円）": 66090.0,
+    "放送関連事業_内デジタル（百万円）": 36350.0,
+    "放送関連事業_内従来周辺（百万円）": 29740.0,
+    "放送外事業_総額（百万円）": 14708.0,
+    "放送外事業_内非シナジー（百万円）": 2413.0,
+    "連結営業収益_総売上高（百万円）": 150285.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 73082.0,
+    "放送関連事業_総額（百万円）": 69720.0,
+    "放送関連事業_内デジタル（百万円）": 38528.0,
+    "放送関連事業_内従来周辺（百万円）": 31192.0,
+    "放送外事業_総額（百万円）": 15426.0,
+    "放送外事業_内非シナジー（百万円）": 2531.0,
+    "連結営業収益_総売上高（百万円）": 158228.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 77367.0,
+    "放送関連事業_総額（百万円）": 74138.0,
+    "放送関連事業_内デジタル（百万円）": 41127.0,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16326.0,
+    "放送外事業_内非シナジー（百万円）": 2679.0,
+    "連結営業収益_総売上高（百万円）": 167831.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 75974.4,
+    "放送関連事業_総額（百万円）": 77428.2,
+    "放送関連事業_内デジタル（百万円）": 44417.2,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16407.6,
+    "放送外事業_内非シナジー（百万円）": 2692.4,
+    "連結営業収益_総売上高（百万円）": 169810.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 74606.9,
+    "放送関連事業_総額（百万円）": 80981.5,
+    "放送関連事業_内デジタル（百万円）": 47970.5,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16489.7,
+    "放送外事業_内非シナジー（百万円）": 2705.9,
+    "連結営業収益_総売上高（百万円）": 172078.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 73263.9,
+    "放送関連事業_総額（百万円）": 84819.2,
+    "放送関連事業_内デジタル（百万円）": 51808.2,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16572.1,
+    "放送外事業_内非シナジー（百万円）": 2719.4,
+    "連結営業収益_総売上高（百万円）": 174655.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 71945.2,
+    "放送関連事業_総額（百万円）": 88963.8,
+    "放送関連事業_内デジタル（百万円）": 55952.8,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16655.0,
+    "放送外事業_内非シナジー（百万円）": 2733.0,
+    "連結営業収益_総売上高（百万円）": 177564.0,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 70650.2,
+    "放送関連事業_総額（百万円）": 93440.1,
+    "放送関連事業_内デジタル（百万円）": 60429.1,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16738.3,
+    "放送外事業_内非シナジー（百万円）": 2746.6,
+    "連結営業収益_総売上高（百万円）": 180828.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 69378.5,
+    "放送関連事業_総額（百万円）": 98274.4,
+    "放送関連事業_内デジタル（百万円）": 65263.4,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16821.9,
+    "放送外事業_内非シナジー（百万円）": 2760.4,
+    "連結営業収益_総売上高（百万円）": 184474.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 68129.7,
+    "放送関連事業_総額（百万円）": 103495.5,
+    "放送関連事業_内デジタル（百万円）": 70484.5,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16906.1,
+    "放送外事業_内非シナジー（百万円）": 2774.2,
+    "連結営業収益_総売上高（百万円）": 188531.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 66903.3,
+    "放送関連事業_総額（百万円）": 109134.2,
+    "放送関連事業_内デジタル（百万円）": 76123.2,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 16990.6,
+    "放送外事業_内非シナジー（百万円）": 2788.1,
+    "連結営業収益_総売上高（百万円）": 193028.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "TX",
+    "放送局名": "テレビ東京HD",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 65699.1,
+    "放送関連事業_総額（百万円）": 115224.1,
+    "放送関連事業_内デジタル（百万円）": 82213.1,
+    "放送関連事業_内従来周辺（百万円）": 33011.0,
+    "放送外事業_総額（百万円）": 17075.5,
+    "放送外事業_内非シナジー（百万円）": 2802.0,
+    "連結営業収益_総売上高（百万円）": 197998.7,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 216899.0,
+    "放送関連事業_総額（百万円）": 318917.0,
+    "放送関連事業_内デジタル（百万円）": 5674.6,
+    "放送関連事業_内従来周辺（百万円）": 313242.4,
+    "放送外事業_総額（百万円）": 285758.0,
+    "放送外事業_内非シナジー（百万円）": 224816.0,
+    "連結営業収益_総売上高（百万円）": 821574.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 213900.0,
+    "放送関連事業_総額（百万円）": 317865.0,
+    "放送関連事業_内デジタル（百万円）": 9355.5,
+    "放送関連事業_内従来周辺（百万円）": 308509.5,
+    "放送外事業_総額（百万円）": 284541.0,
+    "放送外事業_内非シナジー（百万円）": 223858.0,
+    "連結営業収益_総売上高（百万円）": 816306.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 215300.0,
+    "放送関連事業_総額（百万円）": 324848.0,
+    "放送関連事業_内デジタル（百万円）": 13262.9,
+    "放送関連事業_内従来周辺（百万円）": 311585.1,
+    "放送外事業_総額（百万円）": 290495.0,
+    "放送外事業_内非シナジー（百万円）": 228542.0,
+    "連結営業収益_総売上高（百万円）": 830643.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 197500.0,
+    "放送関連事業_総額（百万円）": 321370.0,
+    "放送関連事業_内デジタル（百万円）": 16787.9,
+    "放送関連事業_内従来周辺（百万円）": 304582.1,
+    "放送外事業_総額（百万円）": 287191.0,
+    "放送外事業_内非シナジー（百万円）": 225943.0,
+    "連結営業収益_総売上高（百万円）": 806061.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 191899.0,
+    "放送関連事業_総額（百万円）": 333253.0,
+    "放送関連事業_内デジタル（百万円）": 21284.8,
+    "放送関連事業_内従来周辺（百万円）": 311968.2,
+    "放送外事業_総額（百万円）": 297271.0,
+    "放送外事業_内非シナジー（百万円）": 233874.0,
+    "連結営業収益_総売上高（百万円）": 822423.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 173000.0,
+    "放送関連事業_総額（百万円）": 293088.0,
+    "放送関連事業_内デジタル（百万円）": 24289.2,
+    "放送関連事業_内従来周辺（百万円）": 268798.8,
+    "放送外事業_総額（百万円）": 248136.0,
+    "放送外事業_内非シナジー（百万円）": 188314.0,
+    "連結営業収益_総売上高（百万円）": 714224.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 141300.0,
+    "放送関連事業_総額（百万円）": 242238.0,
+    "放送関連事業_内デジタル（百万円）": 25252.7,
+    "放送関連事業_内従来周辺（百万円）": 216985.3,
+    "放送外事業_総額（百万円）": 204305.0,
+    "放送外事業_内非シナジー（百万円）": 155051.0,
+    "連結営業収益_総売上高（百万円）": 587843.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 146600.0,
+    "放送関連事業_総額（百万円）": 263484.0,
+    "放送関連事業_内デジタル（百万円）": 29094.6,
+    "放送関連事業_内従来周辺（百万円）": 234389.4,
+    "放送外事業_総額（百万円）": 233243.0,
+    "放送外事業_内非シナジー（百万円）": 183500.0,
+    "連結営業収益_総売上高（百万円）": 643327.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 141000.0,
+    "放送関連事業_総額（百万円）": 269058.0,
+    "放送関連事業_内デジタル（百万円）": 32791.1,
+    "放送関連事業_内従来周辺（百万円）": 236266.9,
+    "放送外事業_総額（百万円）": 237931.0,
+    "放送外事業_内非シナジー（百万円）": 187189.0,
+    "連結営業収益_総売上高（百万円）": 647989.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 129700.0,
+    "放送関連事業_総額（百万円）": 284949.0,
+    "放送関連事業_内デジタル（百万円）": 37587.7,
+    "放送関連事業_内従来周辺（百万円）": 247361.3,
+    "放送外事業_総額（百万円）": 251613.0,
+    "放送外事業_内非シナジー（百万円）": 197953.0,
+    "連結営業収益_総売上高（百万円）": 666262.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 123750.0,
+    "放送関連事業_総額（百万円）": 278660.0,
+    "放送関連事業_内デジタル（百万円）": 41583.5,
+    "放送関連事業_内従来周辺（百万円）": 237076.5,
+    "放送外事業_総額（百万円）": 244646.0,
+    "放送外事業_内非シナジー（百万円）": 192472.0,
+    "連結営業収益_総売上高（百万円）": 647056.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 84052.0,
+    "放送関連事業_総額（百万円）": 280934.0,
+    "放送関連事業_内デジタル（百万円）": 46440.8,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 245139.0,
+    "放送外事業_内非シナジー（百万円）": 192859.0,
+    "連結営業収益_総売上高（百万円）": 610125.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 82539.1,
+    "放送関連事業_総額（百万円）": 283256.0,
+    "放送関連事業_内デジタル（百万円）": 48762.8,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 246364.7,
+    "放送外事業_内非シナジー（百万円）": 193823.3,
+    "連結営業収益_総売上高（百万円）": 612159.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 81053.4,
+    "放送関連事業_総額（百万円）": 285694.2,
+    "放送関連事業_内デジタル（百万円）": 51201.0,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 247596.5,
+    "放送外事業_内非シナジー（百万円）": 194792.4,
+    "連結営業収益_総売上高（百万円）": 614344.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 79594.4,
+    "放送関連事業_総額（百万円）": 288254.2,
+    "放送関連事業_内デジタル（百万円）": 53761.0,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 248834.5,
+    "放送外事業_内非シナジー（百万円）": 195766.4,
+    "連結営業収益_総売上高（百万円）": 616683.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 78161.7,
+    "放送関連事業_総額（百万円）": 290942.3,
+    "放送関連事業_内デジタル（百万円）": 56449.1,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 250078.7,
+    "放送外事業_内非シナジー（百万円）": 196745.2,
+    "連結営業収益_総売上高（百万円）": 619182.7,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 76754.8,
+    "放送関連事業_総額（百万円）": 293764.7,
+    "放送関連事業_内デジタル（百万円）": 59271.5,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 251329.1,
+    "放送外事業_内非シナジー（百万円）": 197728.9,
+    "連結営業収益_総売上高（百万円）": 621848.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 75373.2,
+    "放送関連事業_総額（百万円）": 296728.3,
+    "放送関連事業_内デジタル（百万円）": 62235.1,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 252585.7,
+    "放送外事業_内非シナジー（百万円）": 198717.6,
+    "連結営業収益_総売上高（百万円）": 624687.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 74016.5,
+    "放送関連事業_総額（百万円）": 299840.1,
+    "放送関連事業_内デジタル（百万円）": 65346.9,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 253848.6,
+    "放送外事業_内非シナジー（百万円）": 199711.2,
+    "連結営業収益_総売上高（百万円）": 627705.2,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 72684.2,
+    "放送関連事業_総額（百万円）": 303107.4,
+    "放送関連事業_内デジタル（百万円）": 68614.2,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 255117.9,
+    "放送外事業_内非シナジー（百万円）": 200709.7,
+    "連結営業収益_総売上高（百万円）": 630909.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "CX",
+    "放送局名": "フジ・メディアHD",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 71375.9,
+    "放送関連事業_総額（百万円）": 306538.1,
+    "放送関連事業_内デジタル（百万円）": 72044.9,
+    "放送関連事業_内従来周辺（百万円）": 234493.2,
+    "放送外事業_総額（百万円）": 256393.5,
+    "放送外事業_内非シナジー（百万円）": 201713.3,
+    "連結営業収益_総売上高（百万円）": 634307.5,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2015年3月期",
+    "放送事業_電波広告等（百万円）": 876699.0,
+    "放送関連事業_総額（百万円）": 660876.0,
+    "放送関連事業_内デジタル（百万円）": 64179.4,
+    "放送関連事業_内従来周辺（百万円）": 596696.6,
+    "放送外事業_総額（百万円）": 502166.0,
+    "放送外事業_内非シナジー（百万円）": 347317.0,
+    "連結営業収益_総売上高（百万円）": 2039741.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2016年3月期",
+    "放送事業_電波広告等（百万円）": 869200.0,
+    "放送関連事業_総額（百万円）": 686383.0,
+    "放送関連事業_内デジタル（百万円）": 79385.0,
+    "放送関連事業_内従来周辺（百万円）": 606998.0,
+    "放送外事業_総額（百万円）": 509931.0,
+    "放送外事業_内非シナジー（百万円）": 350141.0,
+    "連結営業収益_総売上高（百万円）": 2065514.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2017年3月期",
+    "放送事業_電波広告等（百万円）": 871999.0,
+    "放送関連事業_総額（百万円）": 705145.0,
+    "放送関連事業_内デジタル（百万円）": 93000.1,
+    "放送関連事業_内従来周辺（百万円）": 612144.9,
+    "放送外事業_総額（百万円）": 521925.0,
+    "放送外事業_内非シナジー（百万円）": 357041.0,
+    "連結営業収益_総売上高（百万円）": 2099069.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2018年3月期",
+    "放送事業_電波広告等（百万円）": 835200.0,
+    "放送関連事業_総額（百万円）": 712910.0,
+    "放送関連事業_内デジタル（百万円）": 106287.2,
+    "放送関連事業_内従来周辺（百万円）": 606622.8,
+    "放送外事業_総額（百万円）": 523236.0,
+    "放送外事業_内非シナジー（百万円）": 356814.0,
+    "連結営業収益_総売上高（百万円）": 2071346.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2019年3月期",
+    "放送事業_電波広告等（百万円）": 815099.0,
+    "放送関連事業_総額（百万円）": 734444.0,
+    "放送関連事業_内デジタル（百万円）": 123070.5,
+    "放送関連事業_内従来周辺（百万円）": 611373.5,
+    "放送外事業_総額（百万円）": 534724.0,
+    "放送外事業_内非シナジー（百万円）": 366048.0,
+    "連結営業収益_総売上高（百万円）": 2084267.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2020年3月期",
+    "放送事業_電波広告等（百万円）": 757900.0,
+    "放送関連事業_総額（百万円）": 676247.0,
+    "放送関連事業_内デジタル（百万円）": 134897.1,
+    "放送関連事業_内従来周辺（百万円）": 541349.9,
+    "放送外事業_総額（百万円）": 470287.0,
+    "放送外事業_内非シナジー（百万円）": 307099.0,
+    "連結営業収益_総売上高（百万円）": 1904434.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2021年3月期",
+    "放送事業_電波広告等（百万円）": 655000.0,
+    "放送関連事業_総額（百万円）": 605390.0,
+    "放送関連事業_内デジタル（百万円）": 142573.1,
+    "放送関連事業_内従来周辺（百万円）": 462816.9,
+    "放送外事業_総額（百万円）": 407190.0,
+    "放送外事業_内非シナジー（百万円）": 263630.0,
+    "連結営業収益_総売上高（百万円）": 1667580.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2022年3月期",
+    "放送事業_電波広告等（百万円）": 697700.0,
+    "放送関連事業_総額（百万円）": 678396.0,
+    "放送関連事業_内デジタル（百万円）": 165511.3,
+    "放送関連事業_内従来周辺（百万円）": 512884.7,
+    "放送外事業_総額（百万円）": 465119.0,
+    "放送外事業_内非シナジー（百万円）": 312220.0,
+    "連結営業収益_総売上高（百万円）": 1841215.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2023年3月期",
+    "放送事業_電波広告等（百万円）": 670000.0,
+    "放送関連事業_総額（百万円）": 704199.0,
+    "放送関連事業_内デジタル（百万円）": 187580.9,
+    "放送関連事業_内従来周辺（百万円）": 516618.1,
+    "放送外事業_総額（百万円）": 475163.0,
+    "放送外事業_内非シナジー（百万円）": 319179.0,
+    "連結営業収益_総売上高（百万円）": 1849362.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2024年3月期",
+    "放送事業_電波広告等（百万円）": 744463.0,
+    "放送関連事業_総額（百万円）": 716665.0,
+    "放送関連事業_内デジタル（百万円）": 184170.2,
+    "放送関連事業_内従来周辺（百万円）": 532494.8,
+    "放送外事業_総額（百万円）": 497716.0,
+    "放送外事業_内非シナジー（百万円）": 337643.0,
+    "連結営業収益_総売上高（百万円）": 1958844.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2025年3月期",
+    "放送事業_電波広告等（百万円）": 756760.0,
+    "放送関連事業_総額（百万円）": 747125.0,
+    "放送関連事業_内デジタル（百万円）": 213338.7,
+    "放送関連事業_内従来周辺（百万円）": 533786.3,
+    "放送外事業_総額（百万円）": 503560.0,
+    "放送外事業_内非シナジー（百万円）": 338298.0,
+    "連結営業収益_総売上高（百万円）": 2007445.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2026年3月期",
+    "放送事業_電波広告等（百万円）": 756000.0,
+    "放送関連事業_総額（百万円）": 773799.0,
+    "放送関連事業_内デジタル（百万円）": 233389.2,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 516293.0,
+    "放送外事業_内非シナジー（百万円）": 345365.0,
+    "連結営業収益_総売上高（百万円）": 2046092.0,
+    "区分": "実績"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2027年3月期",
+    "放送事業_電波広告等（百万円）": 742392.0,
+    "放送関連事業_総額（百万円）": 790243.1,
+    "放送関連事業_内デジタル（百万円）": 249833.3,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 518874.5,
+    "放送外事業_内非シナジー（百万円）": 347091.8,
+    "連結営業収益_総売上高（百万円）": 2051509.6,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2028年3月期",
+    "放送事業_電波広告等（百万円）": 729028.9,
+    "放送関連事業_総額（百万円）": 807879.5,
+    "放送関連事業_内デジタル（百万円）": 267469.7,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 521468.8,
+    "放送外事業_内非シナジー（百万円）": 348827.3,
+    "連結営業収益_総売上高（百万円）": 2058377.3,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2029年3月期",
+    "放送事業_電波広告等（百万円）": 715906.4,
+    "放送関連事業_総額（百万円）": 826796.5,
+    "放送関連事業_内デジタル（百万円）": 286386.7,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 524076.2,
+    "放送外事業_内非シナジー（百万円）": 350571.4,
+    "連結営業収益_総売上高（百万円）": 2066779.1,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2030年3月期",
+    "放送事業_電波広告等（百万円）": 703020.1,
+    "放送関連事業_総額（百万円）": 847089.3,
+    "放送関連事業_内デジタル（百万円）": 306679.5,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 526696.6,
+    "放送外事業_内非シナジー（百万円）": 352324.3,
+    "連結営業収益_総売上高（百万円）": 2076805.9,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2031年3月期",
+    "放送事業_電波広告等（百万円）": 690365.7,
+    "放送関連事業_総額（百万円）": 868860.1,
+    "放送関連事業_内デジタル（百万円）": 328450.3,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 529330.0,
+    "放送外事業_内非シナジー（百万円）": 354085.9,
+    "連結営業収益_総売上高（百万円）": 2088555.9,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2032年3月期",
+    "放送事業_電波広告等（百万円）": 677939.2,
+    "放送関連事業_総額（百万円）": 892218.9,
+    "放送関連事業_内デジタル（百万円）": 351809.1,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 531976.7,
+    "放送外事業_内非シナジー（百万円）": 355856.3,
+    "連結営業収益_総売上高（百万円）": 2102134.8,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2033年3月期",
+    "放送事業_電波広告等（百万円）": 665736.3,
+    "放送関連事業_総額（百万円）": 917284.2,
+    "放送関連事業_内デジタル（百万円）": 376874.4,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 534636.6,
+    "放送外事業_内非シナジー（百万円）": 357635.6,
+    "連結営業収益_総売上高（百万円）": 2117657.0,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2034年3月期",
+    "放送事業_電波広告等（百万円）": 653753.0,
+    "放送関連事業_総額（百万円）": 944183.2,
+    "放送関連事業_内デジタル（百万円）": 403773.4,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 537309.8,
+    "放送外事業_内非シナジー（百万円）": 359423.8,
+    "連結営業収益_総売上高（百万円）": 2135245.9,
+    "区分": "予測"
+  },
+  {
+    "放送局キー": "ALL",
+    "放送局名": "主要5局合算",
+    "年度": "2035年3月期",
+    "放送事業_電波広告等（百万円）": 641985.5,
+    "放送関連事業_総額（百万円）": 973052.8,
+    "放送関連事業_内デジタル（百万円）": 432643.0,
+    "放送関連事業_内従来周辺（百万円）": 540409.8,
+    "放送外事業_総額（百万円）": 539996.3,
+    "放送外事業_内非シナジー（百万円）": 361220.9,
+    "連結営業収益_総売上高（百万円）": 2155034.6,
+    "区分": "予測"
+  }
+];
+
+// app_en.js - English Version Logic & Custom Insights
+
+// Station Strategic Insights (English)
+const STATION_INSIGHTS = {
+    'ALL': "Across Japan's Top 5 commercial broadcasters, traditional linear TV advertising is projected to decline by approximately -30%, shrinking from ¥540B in 2015 to around ¥380B by 2035. Meanwhile, the 'Broadcast-Related' segment—driven by digital ad growth (TVer), SVOD subscriptions (Hulu, FOD), and global IP licensing—expands rapidly, bringing the once-obscured digital transition into clear focus. Supported by stable non-broadcasting revenues (real estate, lifestyle), the speed of capital and resource reallocation toward digital and IP will determine each broadcaster's long-term enterprise value.",
+    'NTV': "While Nippon TV maintains relative resilience in linear ad revenue backed by its core viewer rating leadership, terrestrial ad income faces a gradual structural decline. This is offset by its digital domain—including Hulu Japan, multi-platform streaming rights (Netflix, etc.), and overseas content distribution. Building on the Hulu business transition (digital ratio growing from 20% in 2015 to 80% in 2026), the forecast period applies a +8.0% annual digital growth rate aligned with X-Day analysis. Global expansion of Studio Ghibli IP and Los Angeles studio investments will accelerate its 'Content-First' 2033 roadmap.",
+    'EX': "While TV Asahi experiences linear ad decline, its disclosed 'Internet Segment' (TELASA, ABEMA streaming, YouTube, TVer) demonstrates steady expansion. During the forecast period, digital revenue grows at an annual rate of +7.0% based on X-Day parameters. By linking with real-world entertainment initiatives such as the 'Tokyo Dream Park' complex in Ariake, TV Asahi is establishing an integrated ecosystem: monetizing content through digital streaming and immersive live events after building mass awareness on terrestrial TV.",
+    'TBS': "TBS faces a noticeable linear ad contraction, yet boasts a resilient hybrid financial foundation with non-media businesses (real estate, PLAZA retail, Yaruki Switch educational services) contributing nearly half of consolidated revenue. Within broadcast-related operations, digital revenues—powered by U-NEXT integration of Paravi and industry-leading TVer ad sales—grow at an annual rate of +6.0%. Strategic content investments through SAND B and deepening IP synergy across lifestyle consumer touchpoints remain key growth drivers.",
+    'TX': "TV Tokyo maintains the lowest reliance on traditional linear ads among the Top 5, with global anime IP licensing (such as NARUTO worldwide rights and games) and subscription streaming (TxBIZ, SVOD) already accounting for over 35% of total sales. Digital revenue grows at an annual rate of +8.0% through 2035. As the earliest pioneer to achieve an IP/digital-led structure, TV Tokyo stands as the only broadcaster forecast to maintain continuous top-line consolidated revenue growth.",
+    'CX': "Fuji Media HD previously carried a heavy burden of traditional, slow-growth subsidiaries (CS broadcasting, contract production, Quaras agency). However, with FOD subscription expansion and subsidiary Pony Canyon successfully pivoting from physical discs to digital streaming rights and anime IP joint-funding (increasing its digital share from 10% in 2015 to 80% by 2026), digital revenues expand at +5.0% annually. Urban development assets such as Sankei Building and hotel operations (non-broadcasting) provide stable earnings support."
+};
+
+let rawData = [];
+let areaChart = null;
+let ratioChart = null;
+
+// State management
+let currentStation = "ALL";
+let currentYear = 2015;
+let isPlaying = false;
+let playInterval = null;
+
+// Station Names mapping (EN)
+const stationNames = {
+    'ALL': 'Top 5 Broadcasters Total', 
+    'NTV': 'Nippon TV HD (NTV)', 
+    'EX': 'TV Asahi HD (EX)', 
+    'TBS': 'TBS HD', 
+    'TX': 'TV Tokyo HD (TX)', 
+    'CX': 'Fuji Media HD (CX)'
+};
+
+// Initialize on DOM ready
+document.addEventListener("DOMContentLoaded", () => {
+    rawData = FORECAST_DATA;
+
+    // Station selector
+    const stationSelect = document.getElementById("station-select");
+    stationSelect.addEventListener("change", (e) => {
+        currentStation = e.target.value;
+        updateDashboard(currentStation);
+    });
+
+    // Year slider
+    const yearSlider = document.getElementById("year-slider");
+    yearSlider.addEventListener("input", (e) => {
+        currentYear = parseInt(e.target.value);
+        updateVennDisplay();
+    });
+
+    // Play / Pause button
+    const playBtn = document.getElementById("play-btn");
+    playBtn.addEventListener("click", () => {
+        if (isPlaying) {
+            pauseAnimation();
+        } else {
+            playAnimation();
+        }
+    });
+
+    // Common scale toggle
+    const commonScaleCheck = document.getElementById("common-scale-check");
+    commonScaleCheck.addEventListener("change", () => {
+        updateVennDisplay();
+    });
+
+    // Download button
+    const downloadBtn = document.getElementById("download-btn");
+    downloadBtn.addEventListener("click", downloadVennImage);
+
+    // Initial render
+    updateDashboard("ALL");
+});
+
+function updateDashboard(stationKey) {
+    const stationData = rawData.filter(d => d['放送局キー'] === stationKey);
+    
+    const labels = stationData.map(d => d['年度'].replace('年3月期', ' FY').replace('20', "'"));
+    const broadcastData = stationData.map(d => parseFloat(d['放送事業_電波広告等（百万円）']));
+    const relatedDigital = stationData.map(d => parseFloat(d['放送関連事業_内デジタル（百万円）']));
+    const relatedTrad = stationData.map(d => parseFloat(d['放送関連事業_内従来周辺（百万円）']));
+    const nonBroadcast = stationData.map(d => parseFloat(d['放送外事業_総額（百万円）']));
+    
+    updateKPIs(stationData);
+
+    document.getElementById("insights-title").innerText = `💡 ${stationNames[stationKey]} Strategic Insights & Alignment`;
+    document.getElementById("station-insight-text").innerText = STATION_INSIGHTS[stationKey];
+
+    renderAreaChart(labels, broadcastData, relatedDigital, relatedTrad, nonBroadcast);
+    renderRatioChart(labels, broadcastData, relatedDigital, relatedTrad, nonBroadcast);
+    updateTable(stationData);
+    updateVennDisplay();
+}
+
+// Financial amount formatting helper (English: ¥ Billion / ¥ Trillion)
+function formatMoneyEN(valInOku) {
+    const oku = Math.round(valInOku);
+    const billions = (oku / 10).toFixed(1);
+    if (Math.abs(oku) >= 10000) {
+        const trillions = (oku / 10000).toFixed(2);
+        return `¥${trillions} Trillion (¥${Number(billions).toLocaleString()}B)`;
+    }
+    return `¥${Number(billions).toLocaleString()} Billion`;
+}
+
+function formatDiffEN(diffInOku) {
+    const oku = Math.round(diffInOku);
+    const sign = oku >= 0 ? '+' : '';
+    const billions = (oku / 10).toFixed(1);
+    return `vs 2015: ${sign}¥${Number(billions).toLocaleString()}B`;
+}
+
+function updateKPIs(data) {
+    const data2015 = data[0];
+    const data2035 = data[data.length - 1];
+
+    const total2035 = parseFloat(data2035['連結営業収益_総売上高（百万円）']);
+    const total2015 = parseFloat(data2015['連結営業収益_総売上高（百万円）']);
+    
+    const bcRatio2035 = (parseFloat(data2035['放送事業_電波広告等（百万円）']) / total2035) * 100;
+    const bcRatio2015 = (parseFloat(data2015['放送事業_電波広告等（百万円）']) / total2015) * 100;
+
+    const relRatio2035 = (parseFloat(data2035['放送関連事業_総額（百万円）']) / total2035) * 100;
+    const relRatio2015 = (parseFloat(data2015['放送関連事業_総額（百万円）']) / total2015) * 100;
+
+    document.getElementById("kpi-total-rev").innerText = formatMoneyEN(total2035 / 100);
+    const totalDiff = total2035 - total2015;
+    document.getElementById("kpi-total-diff").innerText = formatDiffEN(totalDiff / 100);
+
+    document.getElementById("kpi-broadcast-ratio").innerText = `${bcRatio2035.toFixed(1)} %`;
+    const bcDiff = bcRatio2035 - bcRatio2015;
+    document.getElementById("kpi-broadcast-diff").innerText = `vs 2015: ${bcDiff >= 0 ? '+' : ''}${bcDiff.toFixed(1)}%`;
+
+    document.getElementById("kpi-related-ratio").innerText = `${relRatio2035.toFixed(1)} %`;
+    const relDiff = relRatio2035 - relRatio2015;
+    document.getElementById("kpi-related-diff").innerText = `vs 2015: ${relDiff >= 0 ? '+' : ''}${relDiff.toFixed(1)}%`;
+}
+
+// Venn diagram dynamic updating
+function updateVennDisplay() {
+    document.getElementById("slider-year-val").innerText = currentYear;
+    document.getElementById("year-slider").value = currentYear;
+
+    const targetPeriod = `${currentYear}年3月期`;
+    const yearRecord = rawData.find(d => d['放送局キー'] === currentStation && d['年度'] === targetPeriod);
+
+    if (!yearRecord) return;
+
+    const broadcast = parseFloat(yearRecord['放送事業_電波広告等（百万円）']);
+    const related = parseFloat(yearRecord['放送関連事業_総額（百万円）']);
+    const digital = parseFloat(yearRecord['放送関連事業_内デジタル（百万円）']);
+    const nonBroadcast = parseFloat(yearRecord['放送外事業_総額（百万円）']);
+    const nonSynergy = parseFloat(yearRecord['放送外事業_内非シナジー（百万円）']);
+
+    const bc_oku = broadcast / 100;
+    const rel_oku = related / 100;
+    const nb_oku = nonBroadcast / 100;
+
+    // Scale calculation
+    const isCommonScale = document.getElementById("common-scale-check").checked;
+    const scale = isCommonScale ? 1.05 : (currentStation === "ALL" ? 1.05 : 1.85);
+
+    const rBroadcast = Math.max(15, Math.sqrt(bc_oku) * scale);
+    const rRelated = Math.max(15, Math.sqrt(rel_oku) * scale);
+    const rNonBroadcast = Math.max(15, Math.sqrt(nb_oku) * scale);
+
+    document.getElementById("circle-broadcast").setAttribute("r", rBroadcast);
+    document.getElementById("circle-related").setAttribute("r", rRelated);
+    document.getElementById("circle-nonbroadcast").setAttribute("r", rNonBroadcast);
+
+    // --- Dynamic Distance & Overlap Control Logic ---
+    const P_dig = related > 0 ? (digital / related) : 0;
+    const overlapFactorBcRel = 0.08 + P_dig * 0.36; 
+
+    const P_non_synergy = nonBroadcast > 0 ? (nonSynergy / nonBroadcast) : 0;
+    const overlapFactorRelNb = 0.28 - P_non_synergy * 0.25;
+
+    // X-axis calculations
+    const cxBroadcast = 250 - (rBroadcast + rRelated) * (0.5 - overlapFactorBcRel);
+    const cxRelated = 250 + (rBroadcast + rRelated) * (0.5 - overlapFactorBcRel);
+    
+    // Y-axis calculations (shifted up by 15px to leave snuggling room at the bottom)
+    const cyBroadcast = 135 - (rBroadcast + rNonBroadcast) * (0.35 - 0.20);
+    const cyRelated = 135 - (rRelated + rNonBroadcast) * (0.35 - 0.20);
+    const cyNonBroadcast = 135 + (Math.max(rBroadcast, rRelated) + rNonBroadcast) * (0.45 - overlapFactorRelNb);
+
+    // Update circle centers
+    document.getElementById("circle-broadcast").setAttribute("cx", cxBroadcast);
+    document.getElementById("circle-broadcast").setAttribute("cy", cyBroadcast);
+    
+    document.getElementById("circle-related").setAttribute("cx", cxRelated);
+    document.getElementById("circle-related").setAttribute("cy", cyRelated);
+    
+    document.getElementById("circle-nonbroadcast").setAttribute("cx", 250);
+    document.getElementById("circle-nonbroadcast").setAttribute("cy", cyNonBroadcast);
+
+    // Helper for English billion amounts
+    const formatVennNum = (oku) => `¥${(oku / 10).toFixed(1)}B`;
+
+    // --- Leader Lines Coordinates & Update ---
+    
+    // 1. Broadcasting (pull to far left)
+    const xStartBc = cxBroadcast - rBroadcast;
+    const yStartBc = cyBroadcast;
+    const xMidBc = xStartBc - 25;
+    const yMidBc = yStartBc - 25;
+    const xEndBc = 25;
+    document.getElementById("path-bc").setAttribute("d", `M ${cxBroadcast} ${cyBroadcast} L ${xStartBc} ${yStartBc} L ${xMidBc} ${yMidBc} L ${xEndBc} ${yMidBc}`);
+    
+    document.getElementById("venn-bc-name").setAttribute("x", xEndBc);
+    document.getElementById("venn-bc-name").setAttribute("y", yMidBc - 6);
+    document.getElementById("venn-bc-num").setAttribute("x", xEndBc);
+    document.getElementById("venn-bc-num").setAttribute("y", yMidBc + 14);
+    document.getElementById("venn-bc-num").textContent = formatVennNum(bc_oku);
+
+    // 2. Broadcast-Related (pull to far right)
+    const xStartRel = cxRelated + rRelated;
+    const yStartRel = cyRelated;
+    const xMidRel = xStartRel + 25;
+    const yMidRel = yStartRel - 25;
+    const xEndRel = 475;
+    document.getElementById("path-rel").setAttribute("d", `M ${cxRelated} ${cyRelated} L ${xStartRel} ${yStartRel} L ${xMidRel} ${yMidRel} L ${xEndRel} ${yMidRel}`);
+    
+    document.getElementById("venn-rel-name").setAttribute("x", xEndRel);
+    document.getElementById("venn-rel-name").setAttribute("y", yMidRel - 6);
+    document.getElementById("venn-rel-num").setAttribute("x", xEndRel);
+    document.getElementById("venn-rel-num").setAttribute("y", yMidRel + 14);
+    document.getElementById("venn-rel-num").textContent = formatVennNum(rel_oku);
+
+    // 3. Non-Broadcasting (pull straight down)
+    const xStartNb = 250;
+    const yStartNb = cyNonBroadcast + rNonBroadcast;
+    const yEndNb = Math.min(350, yStartNb + 25);
+    document.getElementById("path-nb").setAttribute("d", `M 250 ${cyNonBroadcast} L 250 ${yStartNb} L 250 ${yEndNb}`);
+    
+    document.getElementById("venn-nb-name").setAttribute("x", 250);
+    document.getElementById("venn-nb-name").setAttribute("y", yEndNb + 12);
+    document.getElementById("venn-nb-num").setAttribute("x", 250);
+    document.getElementById("venn-nb-num").setAttribute("y", yEndNb + 30);
+    document.getElementById("venn-nb-num").textContent = formatVennNum(nb_oku);
+}
+
+// Animation controls
+function playAnimation() {
+    isPlaying = true;
+    const playBtn = document.getElementById("play-btn");
+    playBtn.innerHTML = "⏸ Pause";
+    playBtn.classList.add("playing");
+
+    playInterval = setInterval(() => {
+        if (currentYear >= 2035) {
+            currentYear = 2015;
+        } else {
+            currentYear++;
+        }
+        updateVennDisplay();
+    }, 450);
+}
+
+function pauseAnimation() {
+    isPlaying = false;
+    const playBtn = document.getElementById("play-btn");
+    playBtn.innerHTML = "▶ Play";
+    playBtn.classList.remove("playing");
+    if (playInterval) {
+        clearInterval(playInterval);
+        playInterval = null;
+    }
+}
+
+// Download Venn image (White-theme PNG for slides)
+function downloadVennImage() {
+    const svgElement = document.getElementById("venn-svg");
+    
+    // 1. Deep clone SVG
+    const clonedSvg = svgElement.cloneNode(true);
+    clonedSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    
+    // 2. Insert white background layer
+    const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    bgRect.setAttribute("width", "500");
+    bgRect.setAttribute("height", "390");
+    bgRect.setAttribute("fill", "#ffffff");
+    clonedSvg.insertBefore(bgRect, clonedSvg.firstChild);
+    
+    // 3. Apply light theme styling
+    const cBc = clonedSvg.getElementById("circle-broadcast");
+    cBc.setAttribute("stroke", "#2563eb");
+    cBc.setAttribute("fill", "rgba(59, 130, 246, 0.25)");
+    cBc.removeAttribute("filter");
+    
+    const cRel = clonedSvg.getElementById("circle-related");
+    cRel.setAttribute("stroke", "#0891b2");
+    cRel.setAttribute("fill", "rgba(6, 182, 212, 0.25)");
+    cRel.removeAttribute("filter");
+    
+    const cNb = clonedSvg.getElementById("circle-nonbroadcast");
+    cNb.setAttribute("stroke", "#d97706");
+    cNb.setAttribute("fill", "rgba(245, 158, 11, 0.25)");
+    cNb.removeAttribute("filter");
+    
+    // Lines
+    clonedSvg.getElementById("path-bc").setAttribute("stroke", "#64748b");
+    clonedSvg.getElementById("path-rel").setAttribute("stroke", "#64748b");
+    clonedSvg.getElementById("path-nb").setAttribute("stroke", "#64748b");
+    
+    // Texts
+    const bcName = clonedSvg.getElementById("venn-bc-name");
+    bcName.setAttribute("fill", "#334155");
+    bcName.removeAttribute("text-shadow");
+    const bcNum = clonedSvg.getElementById("venn-bc-num");
+    bcNum.setAttribute("fill", "#1d4ed8");
+    bcNum.removeAttribute("text-shadow");
+    
+    const relName = clonedSvg.getElementById("venn-rel-name");
+    relName.setAttribute("fill", "#334155");
+    relName.removeAttribute("text-shadow");
+    const relNum = clonedSvg.getElementById("venn-rel-num");
+    relNum.setAttribute("fill", "#0891b2");
+    relNum.removeAttribute("text-shadow");
+    
+    const nbName = clonedSvg.getElementById("venn-nb-name");
+    nbName.setAttribute("fill", "#334155");
+    nbName.removeAttribute("text-shadow");
+    const nbNum = clonedSvg.getElementById("venn-nb-num");
+    nbNum.setAttribute("fill", "#b45309");
+    nbNum.removeAttribute("text-shadow");
+    
+    // 4. Render to Canvas & Download
+    const svgString = new XMLSerializer().serializeToString(clonedSvg);
+    const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    const URL = window.URL || window.webkitURL || window;
+    const blobURL = URL.createObjectURL(svgBlob);
+    
+    const image = new Image();
+    image.onload = function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = 500;
+        canvas.height = 390;
+        const context = canvas.getContext("2d");
+        
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0);
+        
+        const pngURL = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        
+        const fileName = `FY${currentYear}_${stationNames[currentStation]}_Venn_Diagram.png`.replace(/\s+/g, '_');
+        
+        downloadLink.href = pngURL;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        URL.revokeObjectURL(blobURL);
+    };
+    image.src = blobURL;
+}
+
+function renderAreaChart(labels, broadcast, digital, traditional, nonBroadcast) {
+    if (areaChart) {
+        areaChart.destroy();
+    }
+
+    const ctx = document.getElementById('areaChart').getContext('2d');
+    
+    areaChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Non-Broadcasting (Real Estate, Lifestyle)',
+                    data: nonBroadcast,
+                    backgroundColor: 'rgba(245, 158, 11, 0.45)',
+                    borderColor: '#f59e0b',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Broadcast-Related: Traditional Peripheral',
+                    data: traditional,
+                    backgroundColor: 'rgba(168, 85, 247, 0.45)',
+                    borderColor: '#a855f7',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Broadcast-Related: Digital & IP (TVer, SVOD)',
+                    data: digital,
+                    backgroundColor: 'rgba(6, 182, 212, 0.55)',
+                    borderColor: '#06b6d4',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Broadcasting (Linear TV Ads)',
+                    data: broadcast,
+                    backgroundColor: 'rgba(59, 130, 246, 0.55)',
+                    borderColor: '#3b82f6',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) label += ': ';
+                            if (context.parsed.y !== null) {
+                                label += `¥${Number(Math.round(context.parsed.y / 100) / 10).toFixed(1)}B (¥${context.parsed.y.toLocaleString()}M)`;
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#64748b', font: { size: 10 } }
+                },
+                y: {
+                    stacked: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { 
+                        color: '#64748b',
+                        callback: function(value) {
+                            return '¥' + (value / 1000).toLocaleString() + 'B';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function renderRatioChart(labels, broadcast, digital, traditional, nonBroadcast) {
+    if (ratioChart) {
+        ratioChart.destroy();
+    }
+
+    const count = labels.length;
+    const totals = [];
+    const pBroadcast = [];
+    const pDigital = [];
+    const pTrad = [];
+    const pNonBroadcast = [];
+
+    for (let i = 0; i < count; i++) {
+        const tot = broadcast[i] + digital[i] + traditional[i] + nonBroadcast[i];
+        totals.push(tot);
+        pBroadcast.push(tot > 0 ? (broadcast[i] / tot) * 100 : 0);
+        pDigital.push(tot > 0 ? (digital[i] / tot) * 100 : 0);
+        pTrad.push(tot > 0 ? (traditional[i] / tot) * 100 : 0);
+        pNonBroadcast.push(tot > 0 ? (nonBroadcast[i] / tot) * 100 : 0);
+    }
+
+    const ctx = document.getElementById('ratioChart').getContext('2d');
+    
+    ratioChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Non-Broadcasting',
+                    data: pNonBroadcast,
+                    backgroundColor: 'rgba(245, 158, 11, 0.45)',
+                    borderColor: '#f59e0b',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Related: Traditional',
+                    data: pTrad,
+                    backgroundColor: 'rgba(168, 85, 247, 0.45)',
+                    borderColor: '#a855f7',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Related: Digital & IP',
+                    data: pDigital,
+                    backgroundColor: 'rgba(6, 182, 212, 0.55)',
+                    borderColor: '#06b6d4',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2
+                },
+                {
+                    label: 'Broadcasting (Linear)',
+                    data: pBroadcast,
+                    backgroundColor: 'rgba(59, 130, 246, 0.55)',
+                    borderColor: '#3b82f6',
+                    fill: true,
+                    tension: 0.3,
+                    borderWidth: 2
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) label += ': ';
+                            if (context.parsed.y !== null) {
+                                label += context.parsed.y.toFixed(1) + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { color: '#64748b', font: { size: 10 } }
+                },
+                y: {
+                    stacked: true,
+                    max: 100,
+                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                    ticks: { 
+                        color: '#64748b',
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateTable(stationData) {
+    const tbody = document.querySelector("#data-table tbody");
+    tbody.innerHTML = "";
+
+    stationData.forEach(row => {
+        const tr = document.createElement("tr");
+        const isForecast = row['区分'] === '予測';
+        if (isForecast) {
+            tr.classList.add("forecast-row");
+        }
+
+        const yearLabel = row['年度'].replace('年3月期', ' FY');
+        const catLabel = isForecast ? 'Forecast' : 'Actual';
+        const bc = parseFloat(row['放送事業_電波広告等（百万円）']).toLocaleString();
+        const rel = parseFloat(row['放送関連事業_総額（百万円）']).toLocaleString();
+        const dig = parseFloat(row['放送関連事業_内デジタル（百万円）']).toLocaleString();
+        const trad = parseFloat(row['放送関連事業_内従来周辺（百万円）']).toLocaleString();
+        const nb = parseFloat(row['放送外事業_総額（百万円）']).toLocaleString();
+        const total = parseFloat(row['連結営業収益_総売上高（百万円）']).toLocaleString();
+
+        tr.innerHTML = `
+            <td><strong>${yearLabel}</strong></td>
+            <td><span class="badge ${isForecast ? 'forecast-badge' : 'actual-badge'}">${catLabel}</span></td>
+            <td class="text-right">¥${bc}M</td>
+            <td class="text-right">¥${rel}M</td>
+            <td class="text-right text-cyan">¥${dig}M</td>
+            <td class="text-right text-purple">¥${trad}M</td>
+            <td class="text-right text-amber">¥${nb}M</td>
+            <td class="text-right font-bold text-emerald">¥${total}M</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+</script>
+</body>
+</html>
