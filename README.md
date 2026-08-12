@@ -1,119 +1,84 @@
-# Commercial TV Shift 2035 (TV-Shift 2035)
-### Japan Top 5 Commercial TV Broadcasters: Revenue Structure Transformation Simulation (2015–2035)
+# Japan Commercial TV Shift 2035 (TV-Shift 2035)
+### Revenue Structure Transformation Simulation of Japan's Top 5 Commercial Broadcasters (2015–2035)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![HTML5](https://img.shields.io/badge/HTML5-Single%20Page%20App-orange.svg)](#)
 [![Chart.js](https://img.shields.io/badge/Charts-Chart.js-FF6384.svg)](#)
+[![Deployment](https://img.shields.io/badge/GitHub%20Pages-Live%20Active-success.svg)](#)
 
-An interactive, zero-dependency financial simulation dashboard analyzing the long-term revenue transition of Japan's Top 5 commercial television networks from traditional linear broadcasting to digital streaming, IP monetization, and non-broadcasting operations.
-
----
-
-## 🔮 Overview
-
-As terrestrial linear TV advertising undergoes a structural secular decline across Japan, commercial broadcasters are actively diversifying their core revenue streams. 
-
-This simulation model bridges statutory securities disclosures (Yuka Shoken Hokokusho actuals: FY2015–FY2026) with long-term econometric forecasting models (FY2027–FY2035) using a **"Differential Modeling Approach"**. It dynamically isolates digital streaming and IP licensing from legacy broadcasting operations, providing executive-level strategic visibility into the structural transformation of Japan's commercial media landscape.
-
-### Covered Broadcasters
-1. **Nippon Television Holdings (NTV / 9404.T)**
-2. **TV Asahi Holdings (EX / 9409.T)**
-3. **TBS Holdings (TBS / 9401.T)**
-4. **TV Tokyo Holdings (TX / 9413.T)**
-5. **Fuji Media Holdings (CX / 4676.T)**
-* **Top 5 Broadcasters Aggregate (Total)**
+An interactive financial intelligence simulation dashboard analyzing the long-term revenue transition, digital streaming growth (TVer/SVOD), global IP monetization, and non-broadcasting structures across Japan's Top 5 commercial television networks (Nippon TV HD, TV Asahi HD, TBS HD, TV Tokyo HD, and Fuji Media HD) from FY2015 to FY2035.
 
 ---
 
-## 🚀 Key Features
+## 🌐 Live Dashboard
 
-* **📦 100% Zero-Dependency Standalone Package**:
-  Fully portable, single-file HTML applications. Runs instantly in any standard browser without local web servers (`localhost`), database setups, or node modules.
-* **🔮 Mathematical Dynamic Venn Diagram**:
-  Circle radii, horizontal overlap, and vertical separation are driven 100% dynamically by financial metrics:
-  * **Broadcasting ⇔ Digital/Related (Horizontal Overlap)**: Expands dynamically with each broadcaster's *Digital Streaming Ratio* (TVer, SVOD).
-  * **Broadcast-Related ⇔ Non-Broadcasting (Vertical Distance)**: Separates based on the proportion of pure non-media assets (e.g., Sankei Building real estate, Granvista hotels, PLAZA lifestyle retail).
-* **📊 Dual Interactive Analytics**:
-  * Stacked Area Revenue Composition Chart (JPY Millions)
-  * Segment Percentage Transition Shift Chart (%)
-  * Full Historical & Forecast Numerical Data Grid
-* **📷 Slide-Export Engine**:
-  Exports publication-ready, white-background SVG/PNG charts formatted specifically for PowerPoint / Keynote presentation decks.
-* **🌐 Dual-Language Support**:
-  Full native Japanese and English versions.
+* **Live Web Application**: [https://naohisastry.github.io/japan-commercial-tv-shift-2035/](https://naohisastry.github.io/japan-commercial-tv-shift-2035/)
 
 ---
 
-## 📁 Repository Structure
+## 🔑 Keywords
+
+Japan Commercial TV, Broadcasters, Terrestrial Linear TV, TVer, Streaming Wars, Hulu Japan, FOD, TELASA, U-NEXT, Paravi, Anime IP Licensing, Studio Ghibli, NARUTO, Non-Broadcasting, Real Estate Synergy, Differential Modeling, Financial Simulation, Market Intelligence, Chart.js, Dynamic Venn Diagram.
+
+---
+
+## 🍱 Key Features
+
+### 1. Dynamic Mathematical Venn Diagram
+* **X-Axis (Horizontal Digital Overlap)**: Driven dynamically by the broadcaster's digital streaming ratio (TVer/SVOD). As digital expansion progresses, the linear broadcasting (blue) and digital/IP (cyan) circles merge deeper together.
+* **Y-Axis (Vertical Non-Media Separation)**: Driven by the proportion of pure non-media assets (real estate, hotels, fitness gyms). Broadcasters with high non-media exposure have their amber circle automatically pushed downward into an isolated position.
+* **Common Scale Mode**: Normalizes individual broadcaster scales against the Top 5 Total base to visually compare absolute revenue sizes.
+
+### 2. Interactive Time-Series Analytics
+* **Revenue Composition by Segment (JPY Millions)**: Stacked area chart showing historical actuals (FY2015–FY2026) and econometric projections (FY2027–FY2035).
+* **Revenue Share Transition (%)**: 100% stacked area chart illustrating structural business portfolio shifts over the 20-year horizon.
+
+### 3. Broadcaster Strategic Insights & Alignment
+* Comprehensive strategic breakdowns for each network (NTV's Hulu/Ghibli roadmap, TV Asahi's Ariake Dream Park ecosystem, TBS's U-NEXT synergy, TV Tokyo's anime-led expansion, and Fuji Media HD's digital transformation via Pony Canyon).
+
+### 4. Detailed Numerical Data Grid
+* Complete financial time-series table covering linear TV ad revenue, broadcast-related totals, digital breakdown, traditional peripheral revenue, non-broadcasting revenue, and consolidated totals.
+
+### 5. Slide-Export Engine
+* One-click download of publication-ready, white-background PNG Venn diagrams optimized for executive PowerPoint and Keynote presentation decks.
+
+---
+
+## 🛠 Repository Structure
+
+This repository is built as a zero-dependency, self-contained single-page web application (SPA):
 
 ```text
-├── TV-Shift2035_Revenue_Transition_Simulator_EN.html  # Standalone English Simulator (Single-file)
-├── TV-Shift2035_Revenue_Transition_Simulator.html     # Standalone Japanese Simulator (Single-file)
-├── index.html                                        # Source HTML (Japanese)
-├── index_en.html                                     # Source HTML (English)
-├── styles.css                                        # Core Glassmorphic Design System
-├── app.js                                            # Japanese UI Logic & Strategic Insights
-├── app_en.js                                         # English UI Logic & Strategic Insights
-├── data.js                                           # Time-Series Database (2015-2035)
-├── generate_aligned_forecast.py                      # Data Harmonization & Differential Modeling Engine
-├── build_dist.py                                     # Multi-Language Standalone Packager
-└── README.md                                         # Project Documentation
+├── index.html         # Main Dashboard Application (Self-Contained English SPA)
+├── README.md          # Project Documentation & Live Links
+├── METHODOLOGY.md     # Differential Modeling & Mathematical Specifications
+├── DATA_SOURCES.md    # Statutory Securities Reports (EDINET) & Lineage
+├── CHANGELOG.md       # Version History
+└── .gitignore         # Git Exclusion Rules
 ```
 
 ---
 
-## 💻 How to Run Locally
+## 📚 Documentation & Evidence
 
-Simply double-click either standalone HTML file to launch immediately in your preferred browser:
-* **English Version**: Double-click `TV-Shift2035_Revenue_Transition_Simulator_EN.html`
-* **Japanese Version**: Double-click `TV-Shift2035_Revenue_Transition_Simulator.html`
-
-To rebuild standalone packages from source after editing styles or data:
-```bash
-python build_dist.py
-```
+* **[DATA_SOURCES.md](DATA_SOURCES.md)** — Statutory annual securities filings (EDINET), investor presentations, and segment decomposition rules.
+* **[METHODOLOGY.md](METHODOLOGY.md)** — Differential modeling methodology, two-tier growth formulation, and dynamic Venn geometry algorithms.
+* **[CHANGELOG.md](CHANGELOG.md)** — Version release log.
 
 ---
 
-## 🌐 Deploy to GitHub Pages (Live Web Access)
+## 🚀 How to Run Locally
 
-You can host this interactive simulation on the web via GitHub Pages in 3 simple steps:
+No web server installation or build steps are required.
 
-1. **Push this repository to GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Commercial TV Shift 2035 Simulator"
-   git branch -M main
-   git remote add origin https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
-   git push -u origin main
-   ```
-2. **Configure GitHub Pages**:
-   * Navigate to your GitHub repository -> **Settings** -> **Pages**.
-   * Under **Build and deployment** -> **Source**, select `Deploy from a branch`.
-   * Set the branch to `main` and folder to `/(root)`, then click **Save**.
-3. **Access Live Links**:
-   * **Japanese Dashboard**: `https://<YOUR-USERNAME>.github.io/<YOUR-REPO-NAME>/index.html`
-   * **English Dashboard**: `https://<YOUR-USERNAME>.github.io/<YOUR-REPO-NAME>/index_en.html`
-   * *(Or open standalone files directly from the repository)*
+1. Clone or download this repository.
+2. Open **`index.html`** in any modern web browser (Chrome, Edge, Safari, Firefox) to launch the simulation instantly.
 
 ---
 
-## 📈 Methodology & Data Lineage
+## ⚖️ Copyright & License
 
-1. **Linear TV Ad Baseline (Broadcasting)**:
-   Fixed to terrestrial linear advertising revenue (Time + Spot), declining along empirical econometric forecast vectors through 2035.
-2. **Broadcast-Related Differential Allocation**:
-   Residual broadcast-related revenues are decomposed into *Digital/Streaming* (TVer, Hulu, FOD, YouTube, TELASA) and *Traditional Peripheral* (CS/BS broadcasting, contract production, traditional music rights).
-3. **Two-Tier Growth Model**:
-   * Digital/IP segments grow at broadcaster-specific annual CAGRs (+5.0% to +8.0%).
-   * Traditional peripheral businesses are modeled conservatively at 0.0% YoY.
-4. **Pure Non-Media Segment Isolation**:
-   Real estate leasing (Akasaka Sacas, Roppongi Hills leases, Sankei Building), fitness gyms (Tipness), and hotel operations are isolated into Non-Broadcasting to ensure core media synergy is measured without distortion.
+© 2026 Naohisa Hashimoto. All rights reserved. Update date: 2026/07/07.  
+Code is open-sourced under the [MIT License](https://opensource.org/licenses/MIT).
 
----
-
-## ⚖️ License & Disclaimer
-
-* Code is open-sourced under the [MIT License](LICENSE).
-* Financial actuals are derived from publicly available annual securities reports (Yuka Shoken Hokokusho). Forecast figures are econometric scenario projections for strategic research and simulation purposes.
+Financial data and disclosures are compiled from publicly available annual securities reports and investor relations materials.
