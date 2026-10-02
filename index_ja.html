@@ -746,6 +746,40 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* Language Switcher Button in Header */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.lang-switch-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+}
+
+.lang-switch-btn:hover {
+    background: rgba(99, 102, 241, 0.25);
+    border-color: rgba(99, 102, 241, 0.5);
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+    transform: translateY(-1px);
+}
+
+.lang-switch-btn .lang-icon {
+    font-size: 1rem;
+}
+
 </style>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -763,6 +797,11 @@ body {
                     <h1>Commercial TV Shift 2035</h1>
                     <p>民放主要5局 売上構造転換シミュレーション (実績2015〜予測2035)</p>
                 </div>
+            </div>
+            <div class="header-right">
+                <a href="index.html" class="lang-switch-btn" title="Switch to English Edition">
+                    <span class="lang-icon">🌐</span> English
+                </a>
             </div>
         </header>
 
