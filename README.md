@@ -81,9 +81,15 @@ No web server installation or build steps are required.
 
 ---
 
-## ⚖️ Copyright & License
-
-© 2026 Naohisa Hashimoto. All rights reserved. Update date: 2026/07/07.  
-Code is open-sourced under the [MIT License](https://opensource.org/licenses/MIT).
+## 📝 Data Sources / データ出典
 
 Financial data and disclosures are compiled from publicly available annual securities reports and investor relations materials.
+
+## 📄 License / ライセンス
+
+- **Code**（HTML / CSS / JavaScript）: [MIT License](LICENSE)
+- **Content**（文章・図表・分析結果・整理済みデータ）: [CC BY 4.0](LICENSE-CONTENT.md)
+- 出典表示例 / Attribution: Naohisa Hashimoto, "japan-commercial-tv-shift-2035", https://naohisastry.github.io/japan-commercial-tv-shift-2035/
+- 第三者の元データの権利は各発行元に帰属します。 / Third-party source data remain the property of their original publishers.
+
+© 2026 Naohisa Hashimoto
