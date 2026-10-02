@@ -12,7 +12,9 @@ An interactive financial intelligence simulation dashboard analyzing the long-te
 
 ## 🌐 Live Dashboard
 
-* **Live Web Application**: [https://naohisastry.github.io/japan-commercial-tv-shift-2035/](https://naohisastry.github.io/japan-commercial-tv-shift-2035/)
+* **English Dashboard (Default)**: [https://naohisastry.github.io/japan-commercial-tv-shift-2035/](https://naohisastry.github.io/japan-commercial-tv-shift-2035/)
+* **Japanese Dashboard (日本語版)**: [https://naohisastry.github.io/japan-commercial-tv-shift-2035/index_ja.html](https://naohisastry.github.io/japan-commercial-tv-shift-2035/index_ja.html)
+  *(Also accessible via `/index_jp.html`)*
 
 ---
 
@@ -50,6 +52,7 @@ This repository is built as a zero-dependency, self-contained single-page web ap
 
 ```text
 ├── index.html         # Main Dashboard Application (Self-Contained English SPA)
+├── index_ja.html      # Japanese Dashboard Application (日本語版SPA本体)
 ├── README.md          # Project Documentation & Live Links
 ├── METHODOLOGY.md     # Differential Modeling & Mathematical Specifications
 ├── DATA_SOURCES.md    # Statutory Securities Reports (EDINET) & Lineage

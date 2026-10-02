@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[TV-Shift2035] Japan Top 5 Commercial Broadcasters - Revenue Structure Transformation Simulation (2015-2035)</title>
+    <title>[TV-Shift2035] 主要5局 売上構造転換予測シミュレーション (2015〜2035年)</title>
     <!-- Google Fonts: Outfit & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -751,86 +751,82 @@ body {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <div class="glow-bg-1"></div>
+    <div class="glow-bg-2"></div>
+    
     <div class="app-container">
-        <!-- Glowing Ambient Lights -->
-        <div class="glow-bg-1"></div>
-        <div class="glow-bg-2"></div>
-
         <!-- Header -->
         <header class="app-header">
-            <div class="header-left">
-                <div class="logo-badge">🔮</div>
-                <div>
+            <div class="logo-group">
+                <span class="logo-icon">🔮</span>
+                <div class="logo-title">
                     <h1>Commercial TV Shift 2035</h1>
-                    <p class="subtitle">Japan Top 5 Commercial Broadcasters - Revenue Structure Transformation Simulation (Actual 2015 - Forecast 2035)</p>
+                    <p>民放主要5局 売上構造転換シミュレーション (実績2015〜予測2035)</p>
                 </div>
             </div>
         </header>
 
-        <!-- Main 2-Column Grid -->
+        <!-- Dashboard Main Grid (KPIs Left, Venn Right) -->
         <div class="dashboard-main-grid">
-            <!-- Left Sidebar: Controls & KPIs -->
+            <!-- Left Sidebar: Controls & KPI Cards -->
             <aside class="kpi-sidebar">
-                <!-- Sidebar Controls: Station selector & Common scale -->
+                <!-- Station & Scale Controls -->
                 <div class="sidebar-controls glass-panel">
                     <div class="control-item">
-                        <label for="station-select">Select Broadcaster</label>
+                        <label for="station-select">放送局切り替え</label>
                         <select id="station-select" class="glass-select">
-                            <option value="ALL">Top 5 Broadcasters Total</option>
-                            <option value="NTV">Nippon TV HD (NTV)</option>
-                            <option value="EX">TV Asahi HD (EX)</option>
-                            <option value="TBS">TBS HD (TBS)</option>
-                            <option value="TX">TV Tokyo HD (TX)</option>
-                            <option value="CX">Fuji Media HD (CX)</option>
+                            <option value="ALL">主要5局合算</option>
+                            <option value="NTV">日本テレビHD</option>
+                            <option value="EX">テレビ朝日HD</option>
+                            <option value="TBS">TBS HD</option>
+                            <option value="TX">テレビ東京HD</option>
+                            <option value="CX">フジ・メディアHD</option>
                         </select>
                     </div>
                     <div class="control-item check-item">
-                        <label class="glass-checkbox">
+                        <label class="glass-checkbox-container">
                             <input type="checkbox" id="common-scale-check">
                             <span class="checkmark"></span>
-                            Common Scale Mode (Top 5 Base)
+                            共通スケールで売上規模を比較 (ALL基準)
                         </label>
                     </div>
                 </div>
 
-                <!-- KPI Card 1: 2035 Total Revenue -->
-                <div class="kpi-card glass-panel highlight-emerald">
+                <div class="kpi-card glass-panel">
                     <div class="kpi-header">
-                        <span class="kpi-title">2035 Forecast Consolidated Revenue</span>
+                        <span class="kpi-title">2035年 連結総売上予測</span>
                         <span class="kpi-icon">💰</span>
                     </div>
-                    <div class="kpi-value text-emerald" id="kpi-total-rev">--</div>
-                    <div class="kpi-footer" id="kpi-total-diff">vs 2015: --</div>
+                    <div class="kpi-value" id="kpi-total-rev">-</div>
+                    <div class="kpi-footer" id="kpi-total-diff">-</div>
                 </div>
-
-                <!-- KPI Card 2: 2035 Broadcasting Share -->
-                <div class="kpi-card glass-panel highlight-blue">
+                
+                <div class="kpi-card glass-panel">
                     <div class="kpi-header">
-                        <span class="kpi-title">2035 Linear TV Ad Share</span>
+                        <span class="kpi-title">2035年 放送事業比率 (電波)</span>
                         <span class="kpi-icon">📡</span>
                     </div>
-                    <div class="kpi-value text-blue" id="kpi-broadcast-ratio">--</div>
-                    <div class="kpi-footer" id="kpi-broadcast-diff">vs 2015: --</div>
+                    <div class="kpi-value" id="kpi-broadcast-ratio">-</div>
+                    <div class="kpi-footer" id="kpi-broadcast-diff">-</div>
                 </div>
-
-                <!-- KPI Card 3: 2035 Related (Digital) Share -->
-                <div class="kpi-card glass-panel highlight-cyan">
+                
+                <div class="kpi-card glass-panel">
                     <div class="kpi-header">
-                        <span class="kpi-title">2035 Related Share (incl. Digital)</span>
+                        <span class="kpi-title">2035年 放送関連比率 (デジタル含)</span>
                         <span class="kpi-icon">⚡</span>
                     </div>
-                    <div class="kpi-value text-cyan" id="kpi-related-ratio">--</div>
-                    <div class="kpi-footer" id="kpi-related-diff">vs 2015: --</div>
+                    <div class="kpi-value" id="kpi-related-ratio">-</div>
+                    <div class="kpi-footer" id="kpi-related-diff">-</div>
                 </div>
             </aside>
 
             <!-- Right Area: Venn Diagram Section -->
             <section class="venn-section glass-panel">
                 <div class="venn-header">
-                    <h2>🔮 3 Core Business Synergy Shift</h2>
+                    <h2>🔮 3大事業の規模・シナジー推移</h2>
                     <div class="venn-controls">
-                        <button id="play-btn" class="glass-btn">▶ Play</button>
-                        <button id="download-btn" class="glass-btn">📸 Download PNG</button>
+                        <button id="play-btn" class="glass-btn">▶ 再生</button>
+                        <button id="download-btn" class="glass-btn">📸 画像DL (PPT用)</button>
                         <div class="slider-group">
                             <span class="year-label" id="slider-year-val">2015</span>
                             <input type="range" id="year-slider" min="2015" max="2035" value="2015" class="glass-slider">
@@ -852,15 +848,17 @@ body {
                             </linearGradient>
                             <linearGradient id="grad-nonbroadcast" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.6"/>
-                                <stop offset="100%" stop-color="#d97706" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#b45309" stop-opacity="0.6"/>
                             </linearGradient>
                             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="6" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
                             </filter>
                         </defs>
-
-                        <!-- Circles -->
+                        
                         <circle id="circle-broadcast" cx="190" cy="150" r="0" fill="url(#grad-broadcast)" stroke="#3b82f6" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
                         <circle id="circle-related" cx="310" cy="150" r="0" fill="url(#grad-related)" stroke="#06b6d4" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
                         <circle id="circle-nonbroadcast" cx="250" cy="240" r="0" fill="url(#grad-nonbroadcast)" stroke="#f59e0b" stroke-width="3" stroke-opacity="0.9" filter="url(#glow)"/>
@@ -871,59 +869,64 @@ body {
                         <path id="path-nb" d="" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.8" stroke-dasharray="3,3"/>
 
                         <!-- Labels for pull-out details -->
-                        <text id="venn-bc-name" x="25" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">Broadcasting (Linear)</text>
-                        <text id="venn-bc-num" x="25" y="0" fill="#60a5fa" font-size="14" font-weight="bold" text-anchor="start">0 Billion</text>
+                        <text id="venn-bc-name" x="25" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="start">放送事業 (電波)</text>
+                        <text id="venn-bc-num" x="25" y="0" fill="#60a5fa" font-size="14" font-weight="bold" text-anchor="start">0 億円</text>
                         
-                        <text id="venn-rel-name" x="475" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">Broadcast-Related (Digital & IP)</text>
-                        <text id="venn-rel-num" x="475" y="0" fill="#22d3ee" font-size="14" font-weight="bold" text-anchor="end">0 Billion</text>
+                        <text id="venn-rel-name" x="475" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="end">放送関連 (デジタル等)</text>
+                        <text id="venn-rel-num" x="475" y="0" fill="#22d3ee" font-size="14" font-weight="bold" text-anchor="end">0 億円</text>
                         
-                        <text id="venn-nb-name" x="250" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">Non-Broadcasting</text>
-                        <text id="venn-nb-num" x="250" y="0" fill="#fbbf24" font-size="14" font-weight="bold" text-anchor="middle">0 Billion</text>
+                        <text id="venn-nb-name" x="250" y="0" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">放送外事業</text>
+                        <text id="venn-nb-num" x="250" y="0" fill="#fbbf24" font-size="14" font-weight="bold" text-anchor="middle">0 億円</text>
                     </svg>
                 </div>
-
-                <!-- Distance Calculation & Methodology Evidence Accordion -->
-                <details class="methodology-accordion">
-                    <summary>💡 View Venn Distance Calculation Logic & Station-Specific Exclusions (Evidence)</summary>
-                    <div class="accordion-content">
-                        <div class="logic-explainer">
-                            <h4>1. Pure Mathematical Dynamic Distance Control Logic</h4>
-                            <p>To eliminate arbitrary visual positioning, circle positions and overlap distances are calculated dynamically using 100% actual and forecast metrics:</p>
-                            <ul>
-                                <li><strong>Broadcasting ⇔ Broadcast-Related (Horizontal Overlap)</strong>: Driven by the <em>Digital Ratio within Related Segment</em> ($= \frac{\text{Digital Revenue}}{\text{Related Total}}$). As digital streaming (TVer/SVOD) expands over time, the blue and cyan circles merge deeper together.</li>
-                                <li><strong>Broadcast-Related ⇔ Non-Broadcasting (Vertical Distance)</strong>: Driven by the <em>Non-Synergy Ratio</em> ($= \frac{\text{Non-Media Non-Synergy Revenue}}{\text{Non-Broadcasting Total}}$). Broadcasters with large non-media operations (e.g. Fuji Sankei Building real estate, TBS PLAZA retail) have their amber circle automatically pushed downward into an isolated position.</li>
-                            </ul>
-                            
-                            <h4>2. Evidence: Disclosed Non-Broadcasting Non-Synergy Segments</h4>
-                            <p>Non-media segments extracted from statutory annual securities reports (Yuka Shoken Hokokusho):</p>
-                            <div class="table-mini-wrapper">
-                                <table class="table-mini">
+                
+                <!-- Logic & Evidence Accordion -->
+                <details class="logic-details">
+                    <summary>💡 ベン図の距離計算ロジックと局別分離項目（エビデンス）を確認</summary>
+                    <div class="details-content">
+                        <div class="logic-grid">
+                            <div class="logic-col">
+                                <h3>📐 重なり（距離）の計算式 (推計値不使用・データ完全連動)</h3>
+                                <ul>
+                                    <li><strong>放送 ⇔ 放送関連 (左右 of 重なり)</strong>: 
+                                        <br><code>デジタル融合度 ＝ 放送関連事業(内デジタル) / 放送関連事業(総額)</code>
+                                        <br><small>※配信比率が高まる（時代が進む）ほど、青とシアン of 円が自動でスライドして融合します。</small>
+                                    </li>
+                                    <li><strong>放送関連 ⇔ 放送外 (上下 of 重なり)</strong>: 
+                                        <br><code>非シナジー比率 ＝ 非シナジー売上高 / 放送外事業(総額)</code>
+                                        <br><small>※不動産などの非メディア事業比率が高い局ほど、オレンジ of 円が下に離れて孤立します。</small>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="logic-col">
+                                <h3>📊 局別 of 「非シナジー事業」として分離・合算した細目</h3>
+                                <table class="logic-table">
                                     <thead>
                                         <tr>
-                                            <th>Broadcaster</th>
-                                            <th>Exclusion Line Items (Non-Broadcasting / Non-Synergy)</th>
+                                            <th>放送局</th>
+                                            <th>分離・合算した非放送細目 (有報ベース)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><strong>Nippon TV HD</strong></td>
-                                            <td>Wellness & Fitness business (TIPNESS gym operations)</td>
+                                            <td><strong>日本テレビHD</strong></td>
+                                            <td>不動産事業(賃貸) ＋ ウェルネス事業(フィットネスクラブ「ティップネス」)</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>TV Asahi HD</strong></td>
-                                            <td>Leasing & Real Estate management (Roppongi Hills & property lease revenues)</td>
+                                            <td><strong>テレビ朝日HD</strong></td>
+                                            <td>不動産事業(賃貸・管理)</td>
                                         </tr>
                                         <tr>
                                             <td><strong>TBS HD</strong></td>
-                                            <td>Real Estate operations (Akasaka Sacas) + Lifestyle retail (PLAZA / B&L) + Educational services (Yaruki Switch)</td>
+                                            <td>不動産事業(賃貸・管理) ＋ ライフスタイル事業(雑貨小売「PLAZA」、教育事業「やる気スイッチ」など)</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>TV Tokyo HD</strong></td>
-                                            <td>Real estate leasing operations (minimal pure non-media footprint)</td>
+                                            <td><strong>テレビ東京HD</strong></td>
+                                            <td>不動産事業(賃貸)</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Fuji Media HD</strong></td>
-                                            <td>Urban Development (Sankei Building) + Tourism & Hospitality (Granvista Hotels & Resorts)</td>
+                                            <td><strong>フジ・メディアHD</strong></td>
+                                            <td>都市開発事業(「サンケイビル」) ＋ 観光・ホテル事業(「グランビスタ ホテル＆リゾート」)</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -938,8 +941,8 @@ body {
         <section class="charts-container">
             <div class="chart-box glass-panel">
                 <div class="chart-header">
-                    <h2>Revenue Composition by Segment (JPY Millions)</h2>
-                    <div class="badge">Actual + Forecast (2026/27 Boundary)</div>
+                    <h2>売上構成額の推移 (百万円)</h2>
+                    <div class="badge">実績 + 予測 (2026/27境界)</div>
                 </div>
                 <div class="canvas-wrapper">
                     <canvas id="areaChart"></canvas>
@@ -948,8 +951,8 @@ body {
 
             <div class="chart-box glass-panel">
                 <div class="chart-header">
-                    <h2>Revenue Share Transition (%)</h2>
-                    <div class="badge">Structural Shift</div>
+                    <h2>売上構成比率の推移 (%)</h2>
+                    <div class="badge">構造転換シフト</div>
                 </div>
                 <div class="canvas-wrapper">
                     <canvas id="ratioChart"></canvas>
@@ -957,10 +960,9 @@ body {
             </div>
         </section>
 
-        <!-- Analysis & Insights -->
         <section class="insights-section glass-panel">
             <div class="insights-header">
-                <h2 id="insights-title">💡 Top 5 Broadcasters Total Strategic Insights & Alignment</h2>
+                <h2 id="insights-title">💡 主要5局合算の戦略インサイトと整合性評価</h2>
             </div>
             <div class="insights-body">
                 <div class="insight-block highlight">
@@ -972,20 +974,20 @@ body {
         <!-- Table Area -->
         <section class="table-section glass-panel">
             <div class="table-header">
-                <h2>📊 Detailed Numerical Data Table</h2>
+                <h2>📊 数値データ詳細テーブル</h2>
             </div>
             <div class="table-wrapper">
                 <table class="data-table" id="data-table">
                     <thead>
                         <tr>
-                            <th>Fiscal Year</th>
-                            <th>Category</th>
-                            <th>Broadcasting (Linear)</th>
-                            <th>Broadcast-Related (Total)</th>
-                            <th>├ Digital (TVer/SVOD)</th>
-                            <th>├ Traditional Peripheral</th>
-                            <th>Non-Broadcasting</th>
-                            <th>Consolidated Net Sales</th>
+                            <th>年度</th>
+                            <th>区分</th>
+                            <th>放送事業(電波)</th>
+                            <th>放送関連(総額)</th>
+                            <th>├内デジタル</th>
+                            <th>├内従来周辺</th>
+                            <th>放送外事業</th>
+                            <th>連結営業収益</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2643,84 +2645,78 @@ const FORECAST_DATA = [
   }
 ];
 
-// app_en.js - English Version Logic & Custom Insights
+// app.js
 
-// Station Strategic Insights (English)
+// 局別カスタムインサイトの定義
 const STATION_INSIGHTS = {
-    'ALL': "Across Japan's Top 5 commercial broadcasters, traditional linear TV advertising is projected to decline by approximately -30%, shrinking from ¥540B in 2015 to around ¥380B by 2035. Meanwhile, the 'Broadcast-Related' segment—driven by digital ad growth (TVer), SVOD subscriptions (Hulu, FOD), and global IP licensing—expands rapidly, bringing the once-obscured digital transition into clear focus. Supported by stable non-broadcasting revenues (real estate, lifestyle), the speed of capital and resource reallocation toward digital and IP will determine each broadcaster's long-term enterprise value.",
-    'NTV': "While Nippon TV maintains relative resilience in linear ad revenue backed by its core viewer rating leadership, terrestrial ad income faces a gradual structural decline. This is offset by its digital domain—including Hulu Japan, multi-platform streaming rights (Netflix, etc.), and overseas content distribution. Building on the Hulu business transition (digital ratio growing from 20% in 2015 to 80% in 2026), the forecast period applies a +8.0% annual digital growth rate aligned with X-Day analysis. Global expansion of Studio Ghibli IP and Los Angeles studio investments will accelerate its 'Content-First' 2033 roadmap.",
-    'EX': "While TV Asahi experiences linear ad decline, its disclosed 'Internet Segment' (TELASA, ABEMA streaming, YouTube, TVer) demonstrates steady expansion. During the forecast period, digital revenue grows at an annual rate of +7.0% based on X-Day parameters. By linking with real-world entertainment initiatives such as the 'Tokyo Dream Park' complex in Ariake, TV Asahi is establishing an integrated ecosystem: monetizing content through digital streaming and immersive live events after building mass awareness on terrestrial TV.",
-    'TBS': "TBS faces a noticeable linear ad contraction, yet boasts a resilient hybrid financial foundation with non-media businesses (real estate, PLAZA retail, Yaruki Switch educational services) contributing nearly half of consolidated revenue. Within broadcast-related operations, digital revenues—powered by U-NEXT integration of Paravi and industry-leading TVer ad sales—grow at an annual rate of +6.0%. Strategic content investments through SAND B and deepening IP synergy across lifestyle consumer touchpoints remain key growth drivers.",
-    'TX': "TV Tokyo maintains the lowest reliance on traditional linear ads among the Top 5, with global anime IP licensing (such as NARUTO worldwide rights and games) and subscription streaming (TxBIZ, SVOD) already accounting for over 35% of total sales. Digital revenue grows at an annual rate of +8.0% through 2035. As the earliest pioneer to achieve an IP/digital-led structure, TV Tokyo stands as the only broadcaster forecast to maintain continuous top-line consolidated revenue growth.",
-    'CX': "Fuji Media HD previously carried a heavy burden of traditional, slow-growth subsidiaries (CS broadcasting, contract production, Quaras agency). However, with FOD subscription expansion and subsidiary Pony Canyon successfully pivoting from physical discs to digital streaming rights and anime IP joint-funding (increasing its digital share from 10% in 2015 to 80% by 2026), digital revenues expand at +5.0% annually. Urban development assets such as Sankei Building and hotel operations (non-broadcasting) provide stable earnings support."
+    'ALL': '主要5局全体として、旧来型の放送波ビジネス（地上波電波広告）は2015年の約5,400億円から2035年には約3,800億円規模へと約-30%縮小する予測です。一方で、TVer広告、定額課金配信（Hulu/FOD等）、および国内外へのIPライセンスで構成される「放送関連事業」が急成長し、かつて「まぶされて」見えなかったデジタルシフトの輪郭がはっきりと可視化されています。放送外事業（ライフスタイル・不動産等）が安定的な下支えとなる中、いかに迅速に電波依存からデジタル・IP展開へとリソースをシフトできるかが、各局の長期生存を分けます。',
+    'NTV': '日本テレビは、コア視聴率首位による放送波広告（タイム・スポット）の相対的安定性を維持しつつも、長期的には電波収入が微減します。これを補うのが「Hulu」「Netflix/他社PF向け配信権利」「海外番販（権利ビジネス）」などのデジタル領域です。実績期間におけるHulu分解結果（2015年デジタル比率20%→2026年80%）を起点とし、予測期間はXデー分析のDigitalRev成長率（年率+8.0%）で堅調に推移。ジブリIPのグローバル展開やLA拠点の戦略投資が、2033年目標である「コンテンツ中核化」への原動力となります。',
+    'EX': 'テレビ朝日は、タイム・スポット広告等の放送事業が減少する一方、セグメント開示されている「インターネット事業（TELASA、ABEMA向け配信、YouTube、TVer等）」が順調に成長します。予測期間中はXデー分析パラメータに基づきデジタル部分が年率+7.0%で伸長。有明の「東京ドリームパーク」など、放送外・体験型ビジネス（物販・興行）とも連動することで、「放送で認知し、デジタルとリアルで稼ぐ」独自の経済圏の確立を目指す構造が読み取れます。',
+    'TBS': 'TBSは、スポット広告の縮小ペースが比較的大きいものの、PLAZAややる気スイッチ等のライフスタイル事業（放送外）と不動産事業が強固なため、連結売上の約半分を非メディアが支えるハイブリッドな財務体質です。放送関連事業内では、ParaviのU-NEXT統合に伴う有料配信売上や配信広告（TVer広告は5局最大級）が牽引役となり、デジタル部分は年率+6.0%で増加。SAND B（IP出資会社）を通じたコンテンツ投資の高度化と、ライフスタイル顧客のIP連動が今後の鍵となります。',
+    'TX': 'テレビ東京は、5局の中で最も放送波広告（タイム・スポット）への依存度が低い一方で、アニメIPグローバルライセンス（NARUTO海外展開・ゲーム化等）および配信課金（テレ東BIZ・SVOD等）の合計が全売上の35%以上に達しています。予測期間中はXデー分析に基づきデジタル部分が年率+8.0%で成長。最も早い段階でデジタル/IP主導の企業へと構造転換を遂げ、かつ連結営業収益全体が右肩上がりで推移する唯一の優良モデルとなっています。',
+    'CX': 'フジ・メディアHDは、地上波広告の減少に対し、伝統的なCS放送や受託制作等の「従来型周辺」の規模の大きさが重荷となっていました。しかし、FODの成長、および子会社ポニーキャニオンの売上構造がCD/DVDからデジタル配信権・アニメIP共同出資（そのデジタル比率が2015年10%→2026年80%に拡大）へ転換したことで、デジタル関連が年率+5.0%で成長。サンケイビルやホテル等の都市開発事業（放送外）が安定して連結収益を下支えする転換構造です。'
 };
 
 let rawData = [];
 let areaChart = null;
 let ratioChart = null;
 
-// State management
+// インタラクティブ表示状態の管理
 let currentStation = "ALL";
 let currentYear = 2015;
 let isPlaying = false;
 let playInterval = null;
 
-// Station Names mapping (EN)
-const stationNames = {
-    'ALL': 'Top 5 Broadcasters Total', 
-    'NTV': 'Nippon TV HD (NTV)', 
-    'EX': 'TV Asahi HD (EX)', 
-    'TBS': 'TBS HD', 
-    'TX': 'TV Tokyo HD (TX)', 
-    'CX': 'Fuji Media HD (CX)'
-};
-
-// Initialize on DOM ready
+// ドキュメント読み込み完了時の処理
 document.addEventListener("DOMContentLoaded", () => {
     rawData = FORECAST_DATA;
+    initDashboard();
+});
 
-    // Station selector
-    const stationSelect = document.getElementById("station-select");
-    stationSelect.addEventListener("change", (e) => {
+function initDashboard() {
+    // 放送局セレクトボックスの変更イベント
+    const select = document.getElementById("station-select");
+    select.addEventListener("change", (e) => {
         currentStation = e.target.value;
         updateDashboard(currentStation);
     });
 
-    // Year slider
-    const yearSlider = document.getElementById("year-slider");
-    yearSlider.addEventListener("input", (e) => {
+    // レンジスライダーの変更イベント
+    const slider = document.getElementById("year-slider");
+    slider.addEventListener("input", (e) => {
+        if (isPlaying) {
+            togglePlay();
+        }
         currentYear = parseInt(e.target.value);
         updateVennDisplay();
     });
 
-    // Play / Pause button
+    // 再生・停止ボタンのイベント
     const playBtn = document.getElementById("play-btn");
     playBtn.addEventListener("click", () => {
-        if (isPlaying) {
-            pauseAnimation();
-        } else {
-            playAnimation();
-        }
+        togglePlay();
     });
 
-    // Common scale toggle
-    const commonScaleCheck = document.getElementById("common-scale-check");
-    commonScaleCheck.addEventListener("change", () => {
+    // 画像ダウンロードボタンのイベント
+    const downloadBtn = document.getElementById("download-btn");
+    downloadBtn.addEventListener("click", () => {
+        downloadVennImage();
+    });
+
+    // 共通スケールチェックボックスのイベント
+    const scaleCheck = document.getElementById("common-scale-check");
+    scaleCheck.addEventListener("change", () => {
         updateVennDisplay();
     });
 
-    // Download button
-    const downloadBtn = document.getElementById("download-btn");
-    downloadBtn.addEventListener("click", downloadVennImage);
-
-    // Initial render
+    // 初期表示
     updateDashboard("ALL");
-});
+}
 
 function updateDashboard(stationKey) {
     const stationData = rawData.filter(d => d['放送局キー'] === stationKey);
     
-    const labels = stationData.map(d => d['年度'].replace('年3月期', ' FY').replace('20', "'"));
+    const labels = stationData.map(d => d['年度'].replace('年3月期', ''));
     const broadcastData = stationData.map(d => parseFloat(d['放送事業_電波広告等（百万円）']));
     const relatedDigital = stationData.map(d => parseFloat(d['放送関連事業_内デジタル（百万円）']));
     const relatedTrad = stationData.map(d => parseFloat(d['放送関連事業_内従来周辺（百万円）']));
@@ -2728,7 +2724,15 @@ function updateDashboard(stationKey) {
     
     updateKPIs(stationData);
 
-    document.getElementById("insights-title").innerText = `💡 ${stationNames[stationKey]} Strategic Insights & Alignment`;
+    const stationNames = {
+        'ALL': '主要5局合算', 
+        'NTV': '日本テレビHD', 
+        'EX': 'テレビ朝日HD', 
+        'TBS': 'TBS HD', 
+        'TX': 'テレビ東京HD', 
+        'CX': 'フジ・メディアHD'
+    };
+    document.getElementById("insights-title").innerText = `💡 ${stationNames[stationKey]}の戦略インサイトと整合性評価`;
     document.getElementById("station-insight-text").innerText = STATION_INSIGHTS[stationKey];
 
     renderAreaChart(labels, broadcastData, relatedDigital, relatedTrad, nonBroadcast);
@@ -2737,22 +2741,19 @@ function updateDashboard(stationKey) {
     updateVennDisplay();
 }
 
-// Financial amount formatting helper (English: ¥ Billion / ¥ Trillion)
-function formatMoneyEN(valInOku) {
-    const oku = Math.round(valInOku);
-    const billions = (oku / 10).toFixed(1);
-    if (Math.abs(oku) >= 10000) {
-        const trillions = (oku / 10000).toFixed(2);
-        return `¥${trillions} Trillion (¥${Number(billions).toLocaleString()}B)`;
+// 億円の数値を必要に応じて「兆・億円」の日本語フォーマットに変換するヘルパー関数
+function formatOkuToCho(valInOku) {
+    const rounded = Math.round(valInOku);
+    if (Math.abs(rounded) >= 10000) {
+        const cho = Math.floor(Math.abs(rounded) / 10000);
+        const oku = Math.abs(rounded) % 10000;
+        const sign = rounded < 0 ? "-" : "";
+        if (oku === 0) {
+            return `${sign}${cho} 兆円`;
+        }
+        return `${sign}${cho} 兆 ${oku.toLocaleString()} 億円`;
     }
-    return `¥${Number(billions).toLocaleString()} Billion`;
-}
-
-function formatDiffEN(diffInOku) {
-    const oku = Math.round(diffInOku);
-    const sign = oku >= 0 ? '+' : '';
-    const billions = (oku / 10).toFixed(1);
-    return `vs 2015: ${sign}¥${Number(billions).toLocaleString()}B`;
+    return `${rounded.toLocaleString()} 億円`;
 }
 
 function updateKPIs(data) {
@@ -2768,20 +2769,20 @@ function updateKPIs(data) {
     const relRatio2035 = (parseFloat(data2035['放送関連事業_総額（百万円）']) / total2035) * 100;
     const relRatio2015 = (parseFloat(data2015['放送関連事業_総額（百万円）']) / total2015) * 100;
 
-    document.getElementById("kpi-total-rev").innerText = formatMoneyEN(total2035 / 100);
+    document.getElementById("kpi-total-rev").innerText = formatOkuToCho(total2035 / 100);
     const totalDiff = total2035 - total2015;
-    document.getElementById("kpi-total-diff").innerText = formatDiffEN(totalDiff / 100);
+    document.getElementById("kpi-total-diff").innerText = `2015年比: ${totalDiff >= 0 ? '+' : ''}${formatOkuToCho(totalDiff / 100)}`;
 
     document.getElementById("kpi-broadcast-ratio").innerText = `${bcRatio2035.toFixed(1)} %`;
     const bcDiff = bcRatio2035 - bcRatio2015;
-    document.getElementById("kpi-broadcast-diff").innerText = `vs 2015: ${bcDiff >= 0 ? '+' : ''}${bcDiff.toFixed(1)}%`;
+    document.getElementById("kpi-broadcast-diff").innerText = `2015年比: ${bcDiff >= 0 ? '+' : ''}${bcDiff.toFixed(1)}%`;
 
     document.getElementById("kpi-related-ratio").innerText = `${relRatio2035.toFixed(1)} %`;
     const relDiff = relRatio2035 - relRatio2015;
-    document.getElementById("kpi-related-diff").innerText = `vs 2015: ${relDiff >= 0 ? '+' : ''}${relDiff.toFixed(1)}%`;
+    document.getElementById("kpi-related-diff").innerText = `2015年比: ${relDiff >= 0 ? '+' : ''}${relDiff.toFixed(1)}%`;
 }
 
-// Venn diagram dynamic updating
+// 時系列ベン図（円の半径・中心位置・引き出し線リーダーの更新）
 function updateVennDisplay() {
     document.getElementById("slider-year-val").innerText = currentYear;
     document.getElementById("year-slider").value = currentYear;
@@ -2801,7 +2802,7 @@ function updateVennDisplay() {
     const rel_oku = related / 100;
     const nb_oku = nonBroadcast / 100;
 
-    // Scale calculation
+    // 共通スケールチェックボックスがONの場合、合算（ALL）基準の 1.05 で全データを統一描画し、売上絶対額を正確に比較可能にする
     const isCommonScale = document.getElementById("common-scale-check").checked;
     const scale = isCommonScale ? 1.05 : (currentStation === "ALL" ? 1.05 : 1.85);
 
@@ -2813,23 +2814,23 @@ function updateVennDisplay() {
     document.getElementById("circle-related").setAttribute("r", rRelated);
     document.getElementById("circle-nonbroadcast").setAttribute("r", rNonBroadcast);
 
-    // --- Dynamic Distance & Overlap Control Logic ---
+    // --- データ連動型 距離・重複制御ロジック ---
     const P_dig = related > 0 ? (digital / related) : 0;
     const overlapFactorBcRel = 0.08 + P_dig * 0.36; 
 
     const P_non_synergy = nonBroadcast > 0 ? (nonSynergy / nonBroadcast) : 0;
     const overlapFactorRelNb = 0.28 - P_non_synergy * 0.25;
 
-    // X-axis calculations
+    // X軸座標の計算（左右方向への接近・融合）
     const cxBroadcast = 250 - (rBroadcast + rRelated) * (0.5 - overlapFactorBcRel);
     const cxRelated = 250 + (rBroadcast + rRelated) * (0.5 - overlapFactorBcRel);
     
-    // Y-axis calculations (shifted up by 15px to leave snuggling room at the bottom)
+    // Y軸座標の計算（全体をさらに上に15px持ち上げ、下端にゆとりを作る）
     const cyBroadcast = 135 - (rBroadcast + rNonBroadcast) * (0.35 - 0.20);
     const cyRelated = 135 - (rRelated + rNonBroadcast) * (0.35 - 0.20);
     const cyNonBroadcast = 135 + (Math.max(rBroadcast, rRelated) + rNonBroadcast) * (0.45 - overlapFactorRelNb);
 
-    // Update circle centers
+    // 円の位置を動的に更新
     document.getElementById("circle-broadcast").setAttribute("cx", cxBroadcast);
     document.getElementById("circle-broadcast").setAttribute("cy", cyBroadcast);
     
@@ -2839,12 +2840,9 @@ function updateVennDisplay() {
     document.getElementById("circle-nonbroadcast").setAttribute("cx", 250);
     document.getElementById("circle-nonbroadcast").setAttribute("cy", cyNonBroadcast);
 
-    // Helper for English billion amounts
-    const formatVennNum = (oku) => `¥${(oku / 10).toFixed(1)}B`;
-
-    // --- Leader Lines Coordinates & Update ---
+    // --- 引き出し線 (Leader Lines) の座標計算と更新 ---
     
-    // 1. Broadcasting (pull to far left)
+    // 1. 放送事業 (左端へ引き出す)
     const xStartBc = cxBroadcast - rBroadcast;
     const yStartBc = cyBroadcast;
     const xMidBc = xStartBc - 25;
@@ -2856,9 +2854,9 @@ function updateVennDisplay() {
     document.getElementById("venn-bc-name").setAttribute("y", yMidBc - 6);
     document.getElementById("venn-bc-num").setAttribute("x", xEndBc);
     document.getElementById("venn-bc-num").setAttribute("y", yMidBc + 14);
-    document.getElementById("venn-bc-num").textContent = formatVennNum(bc_oku);
+    document.getElementById("venn-bc-num").textContent = `${Math.round(bc_oku).toLocaleString()} 億円`;
 
-    // 2. Broadcast-Related (pull to far right)
+    // 2. 放送関連事業 (右端へ引き出す)
     const xStartRel = cxRelated + rRelated;
     const yStartRel = cyRelated;
     const xMidRel = xStartRel + 25;
@@ -2870,11 +2868,12 @@ function updateVennDisplay() {
     document.getElementById("venn-rel-name").setAttribute("y", yMidRel - 6);
     document.getElementById("venn-rel-num").setAttribute("x", xEndRel);
     document.getElementById("venn-rel-num").setAttribute("y", yMidRel + 14);
-    document.getElementById("venn-rel-num").textContent = formatVennNum(rel_oku);
+    document.getElementById("venn-rel-num").textContent = `${Math.round(rel_oku).toLocaleString()} 億円`;
 
-    // 3. Non-Broadcasting (pull straight down)
+    // 3. 放送外事業 (真下へ引き出す)
     const xStartNb = 250;
     const yStartNb = cyNonBroadcast + rNonBroadcast;
+    // SVGの下枠(高さ430)をはみ出さないようにクリップ制限を設ける
     const yEndNb = Math.min(350, yStartNb + 25);
     document.getElementById("path-nb").setAttribute("d", `M 250 ${cyNonBroadcast} L 250 ${yStartNb} L 250 ${yEndNb}`);
     
@@ -2882,53 +2881,47 @@ function updateVennDisplay() {
     document.getElementById("venn-nb-name").setAttribute("y", yEndNb + 12);
     document.getElementById("venn-nb-num").setAttribute("x", 250);
     document.getElementById("venn-nb-num").setAttribute("y", yEndNb + 30);
-    document.getElementById("venn-nb-num").textContent = formatVennNum(nb_oku);
+    document.getElementById("venn-nb-num").textContent = `${Math.round(nb_oku).toLocaleString()} 億円`;
 }
 
-// Animation controls
-function playAnimation() {
-    isPlaying = true;
+// オートプレイのトグル
+function togglePlay() {
     const playBtn = document.getElementById("play-btn");
-    playBtn.innerHTML = "⏸ Pause";
-    playBtn.classList.add("playing");
-
-    playInterval = setInterval(() => {
-        if (currentYear >= 2035) {
-            currentYear = 2015;
-        } else {
-            currentYear++;
-        }
-        updateVennDisplay();
-    }, 450);
-}
-
-function pauseAnimation() {
-    isPlaying = false;
-    const playBtn = document.getElementById("play-btn");
-    playBtn.innerHTML = "▶ Play";
-    playBtn.classList.remove("playing");
-    if (playInterval) {
+    
+    if (isPlaying) {
         clearInterval(playInterval);
-        playInterval = null;
+        playBtn.innerText = "▶ 再生";
+        isPlaying = false;
+    } else {
+        playBtn.innerText = "⏸ 一時停止";
+        isPlaying = true;
+        
+        playInterval = setInterval(() => {
+            currentYear++;
+            if (currentYear > 2035) {
+                currentYear = 2015;
+            }
+            updateVennDisplay();
+        }, 900);
     }
 }
 
-// Download Venn image (White-theme PNG for slides)
+// 白地PPT用の画像書き出し・ダウンロード処理
 function downloadVennImage() {
     const svgElement = document.getElementById("venn-svg");
     
-    // 1. Deep clone SVG
+    // 1. SVGのディープクローンを作成
     const clonedSvg = svgElement.cloneNode(true);
     clonedSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     
-    // 2. Insert white background layer
+    // 2. 白背景レイヤー（rect）を最背面に挿入
     const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
     bgRect.setAttribute("width", "500");
-    bgRect.setAttribute("height", "390");
+    bgRect.setAttribute("height", "390"); // 高さを390に合わせる
     bgRect.setAttribute("fill", "#ffffff");
     clonedSvg.insertBefore(bgRect, clonedSvg.firstChild);
     
-    // 3. Apply light theme styling
+    // 3. 各オブジェクトのカラー定義を「白地用ライトテーマ」に書き換える
     const cBc = clonedSvg.getElementById("circle-broadcast");
     cBc.setAttribute("stroke", "#2563eb");
     cBc.setAttribute("fill", "rgba(59, 130, 246, 0.25)");
@@ -2944,12 +2937,12 @@ function downloadVennImage() {
     cNb.setAttribute("fill", "rgba(245, 158, 11, 0.25)");
     cNb.removeAttribute("filter");
     
-    // Lines
+    // 引き出し破線
     clonedSvg.getElementById("path-bc").setAttribute("stroke", "#64748b");
     clonedSvg.getElementById("path-rel").setAttribute("stroke", "#64748b");
     clonedSvg.getElementById("path-nb").setAttribute("stroke", "#64748b");
     
-    // Texts
+    // 文字フォント・色
     const bcName = clonedSvg.getElementById("venn-bc-name");
     bcName.setAttribute("fill", "#334155");
     bcName.removeAttribute("text-shadow");
@@ -2971,7 +2964,7 @@ function downloadVennImage() {
     nbNum.setAttribute("fill", "#b45309");
     nbNum.removeAttribute("text-shadow");
     
-    // 4. Render to Canvas & Download
+    // 4. SVG文字列からイメージへデコード
     const svgString = new XMLSerializer().serializeToString(clonedSvg);
     const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
     const URL = window.URL || window.webkitURL || window;
@@ -2981,17 +2974,22 @@ function downloadVennImage() {
     image.onload = function() {
         const canvas = document.createElement("canvas");
         canvas.width = 500;
-        canvas.height = 390;
+        canvas.height = 390; // 高さを390に合わせる
         const context = canvas.getContext("2d");
         
         context.fillStyle = "#ffffff";
         context.fillRect(0, 0, canvas.width, canvas.height);
+        
         context.drawImage(image, 0, 0);
         
         const pngURL = canvas.toDataURL("image/png");
         const downloadLink = document.createElement("a");
         
-        const fileName = `FY${currentYear}_${stationNames[currentStation]}_Venn_Diagram.png`.replace(/\s+/g, '_');
+        const stationNames = {
+            'ALL': '主要5局合算', 'NTV': '日本テレビHD', 'EX': 'テレビ朝日HD', 
+            'TBS': 'TBS_HD', 'TX': 'テレビ東京HD', 'CX': 'フジ・メディアHD'
+        };
+        const fileName = `${currentYear}年度_${stationNames[currentStation]}_売上ベン図.png`;
         
         downloadLink.href = pngURL;
         downloadLink.download = fileName;
@@ -3017,83 +3015,69 @@ function renderAreaChart(labels, broadcast, digital, traditional, nonBroadcast) 
             labels: labels,
             datasets: [
                 {
-                    label: 'Non-Broadcasting (Real Estate, Lifestyle)',
+                    label: '放送外事業 (通販・不動産・他)',
                     data: nonBroadcast,
                     backgroundColor: 'rgba(245, 158, 11, 0.45)',
                     borderColor: '#f59e0b',
+                    borderWidth: 2,
                     fill: true,
-                    tension: 0.3,
-                    borderWidth: 1.5
+                    tension: 0.1,
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Broadcast-Related: Traditional Peripheral',
+                    label: '放送関連・内従来周辺 (興行・受託制作等)',
                     data: traditional,
                     backgroundColor: 'rgba(168, 85, 247, 0.45)',
                     borderColor: '#a855f7',
+                    borderWidth: 2,
                     fill: true,
-                    tension: 0.3,
-                    borderWidth: 1.5
+                    tension: 0.1,
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Broadcast-Related: Digital & IP (TVer, SVOD)',
+                    label: '放送関連・内デジタル (Hulu/TVer等)',
                     data: digital,
-                    backgroundColor: 'rgba(6, 182, 212, 0.55)',
+                    backgroundColor: 'rgba(6, 182, 212, 0.45)',
                     borderColor: '#06b6d4',
+                    borderWidth: 2,
                     fill: true,
-                    tension: 0.3,
-                    borderWidth: 2
+                    tension: 0.1,
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Broadcasting (Linear TV Ads)',
+                    label: '放送事業 (タイム・スポット広告等)',
                     data: broadcast,
-                    backgroundColor: 'rgba(59, 130, 246, 0.55)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.45)',
                     borderColor: '#3b82f6',
+                    borderWidth: 2,
                     fill: true,
-                    tension: 0.3,
-                    borderWidth: 2
+                    tension: 0.1,
+                    stack: 'stack1'
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
             plugins: {
                 legend: {
-                    position: 'top',
-                    labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } }
+                    position: 'bottom',
+                    labels: { color: '#94a3b8', font: { family: 'Outfit, sans-serif' } }
                 },
                 tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
-                            if (context.parsed.y !== null) {
-                                label += `¥${Number(Math.round(context.parsed.y / 100) / 10).toFixed(1)}B (¥${context.parsed.y.toLocaleString()}M)`;
-                            }
-                            return label;
-                        }
-                    }
+                    mode: 'index',
+                    intersect: false
                 }
             },
             scales: {
                 x: {
-                    stacked: true,
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#64748b', font: { size: 10 } }
+                    ticks: { color: '#94a3b8' }
                 },
                 y: {
                     stacked: true,
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { 
-                        color: '#64748b',
-                        callback: function(value) {
-                            return '¥' + (value / 1000).toLocaleString() + 'B';
-                        }
-                    }
+                    ticks: { color: '#94a3b8' }
                 }
             }
         }
@@ -3105,143 +3089,96 @@ function renderRatioChart(labels, broadcast, digital, traditional, nonBroadcast)
         ratioChart.destroy();
     }
 
-    const count = labels.length;
-    const totals = [];
-    const pBroadcast = [];
-    const pDigital = [];
-    const pTrad = [];
-    const pNonBroadcast = [];
-
-    for (let i = 0; i < count; i++) {
-        const tot = broadcast[i] + digital[i] + traditional[i] + nonBroadcast[i];
-        totals.push(tot);
-        pBroadcast.push(tot > 0 ? (broadcast[i] / tot) * 100 : 0);
-        pDigital.push(tot > 0 ? (digital[i] / tot) * 100 : 0);
-        pTrad.push(tot > 0 ? (traditional[i] / tot) * 100 : 0);
-        pNonBroadcast.push(tot > 0 ? (nonBroadcast[i] / tot) * 100 : 0);
-    }
-
     const ctx = document.getElementById('ratioChart').getContext('2d');
     
+    const total = labels.map((_, i) => broadcast[i] + digital[i] + traditional[i] + nonBroadcast[i]);
+    const broadcastRatio = labels.map((_, i) => (broadcast[i] / total[i]) * 100);
+    const digitalRatio = labels.map((_, i) => (digital[i] / total[i]) * 100);
+    const traditionalRatio = labels.map((_, i) => (traditional[i] / total[i]) * 100);
+    const nonBroadcastRatio = labels.map((_, i) => (nonBroadcast[i] / total[i]) * 100);
+
     ratioChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: labels,
             datasets: [
                 {
-                    label: 'Non-Broadcasting',
-                    data: pNonBroadcast,
-                    backgroundColor: 'rgba(245, 158, 11, 0.45)',
-                    borderColor: '#f59e0b',
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 1.5
+                    label: '放送事業比率',
+                    data: broadcastRatio,
+                    backgroundColor: '#3b82f6',
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Related: Traditional',
-                    data: pTrad,
-                    backgroundColor: 'rgba(168, 85, 247, 0.45)',
-                    borderColor: '#a855f7',
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 1.5
+                    label: '放送関連・デジタル比率',
+                    data: digitalRatio,
+                    backgroundColor: '#06b6d4',
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Related: Digital & IP',
-                    data: pDigital,
-                    backgroundColor: 'rgba(6, 182, 212, 0.55)',
-                    borderColor: '#06b6d4',
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 2
+                    label: '放送関連・従来周辺比率',
+                    data: traditionalRatio,
+                    backgroundColor: '#a855f7',
+                    stack: 'stack1'
                 },
                 {
-                    label: 'Broadcasting (Linear)',
-                    data: pBroadcast,
-                    backgroundColor: 'rgba(59, 130, 246, 0.55)',
-                    borderColor: '#3b82f6',
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 2
+                    label: '放送外事業比率',
+                    data: nonBroadcastRatio,
+                    backgroundColor: '#f59e0b',
+                    stack: 'stack1'
                 }
             ]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: {
-                mode: 'index',
-                intersect: false,
-            },
             plugins: {
                 legend: {
-                    position: 'top',
-                    labels: { color: '#94a3b8', boxWidth: 12, font: { size: 10 } }
+                    position: 'bottom',
+                    labels: { color: '#94a3b8', font: { family: 'Outfit, sans-serif' } }
                 },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
-                            if (context.parsed.y !== null) {
-                                label += context.parsed.y.toFixed(1) + '%';
-                            }
-                            return label;
+                            return `${context.dataset.label}: ${context.raw.toFixed(1)}%`;
                         }
                     }
                 }
             },
             scales: {
                 x: {
-                    stacked: true,
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { color: '#64748b', font: { size: 10 } }
+                    grid: { display: false },
+                    ticks: { color: '#94a3b8' }
                 },
                 y: {
                     stacked: true,
                     max: 100,
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                    ticks: { 
-                        color: '#64748b',
-                        callback: function(value) {
-                            return value + '%';
-                        }
-                    }
+                    ticks: { color: '#94a3b8', callback: value => `${value}%` }
                 }
             }
         }
     });
 }
 
-function updateTable(stationData) {
+function updateTable(data) {
     const tbody = document.querySelector("#data-table tbody");
     tbody.innerHTML = "";
 
-    stationData.forEach(row => {
+    data.forEach(row => {
         const tr = document.createElement("tr");
-        const isForecast = row['区分'] === '予測';
-        if (isForecast) {
+        if (row['区分'] === '予測') {
             tr.classList.add("forecast-row");
         }
 
-        const yearLabel = row['年度'].replace('年3月期', ' FY');
-        const catLabel = isForecast ? 'Forecast' : 'Actual';
-        const bc = parseFloat(row['放送事業_電波広告等（百万円）']).toLocaleString();
-        const rel = parseFloat(row['放送関連事業_総額（百万円）']).toLocaleString();
-        const dig = parseFloat(row['放送関連事業_内デジタル（百万円）']).toLocaleString();
-        const trad = parseFloat(row['放送関連事業_内従来周辺（百万円）']).toLocaleString();
-        const nb = parseFloat(row['放送外事業_総額（百万円）']).toLocaleString();
-        const total = parseFloat(row['連結営業収益_総売上高（百万円）']).toLocaleString();
-
         tr.innerHTML = `
-            <td><strong>${yearLabel}</strong></td>
-            <td><span class="badge ${isForecast ? 'forecast-badge' : 'actual-badge'}">${catLabel}</span></td>
-            <td class="text-right">¥${bc}M</td>
-            <td class="text-right">¥${rel}M</td>
-            <td class="text-right text-cyan">¥${dig}M</td>
-            <td class="text-right text-purple">¥${trad}M</td>
-            <td class="text-right text-amber">¥${nb}M</td>
-            <td class="text-right font-bold text-emerald">¥${total}M</td>
+            <td>${row['年度']}</td>
+            <td>${row['区分']}</td>
+            <td>${Math.round(parseFloat(row['放送事業_電波広告等（百万円）'])).toLocaleString()}</td>
+            <td>${Math.round(parseFloat(row['放送関連事業_総額（百万円）'])).toLocaleString()}</td>
+            <td>${Math.round(parseFloat(row['放送関連事業_内デジタル（百万円）'])).toLocaleString()}</td>
+            <td>${Math.round(parseFloat(row['放送関連事業_内従来周辺（百万円）'])).toLocaleString()}</td>
+            <td>${Math.round(parseFloat(row['放送外事業_総額（百万円）'])).toLocaleString()}</td>
+            <td>${Math.round(parseFloat(row['連結営業収益_総売上高（百万円）'])).toLocaleString()}</td>
         `;
         tbody.appendChild(tr);
     });
