@@ -6,6 +6,8 @@
 [![Chart.js](https://img.shields.io/badge/Charts-Chart.js-FF6384.svg)](#)
 [![Deployment](https://img.shields.io/badge/GitHub%20Pages-Live%20Active-success.svg)](#)
 
+![TV-Shift 2035 Preview](social-preview.png)
+
 An interactive financial intelligence simulation dashboard analyzing the long-term revenue transition, digital streaming growth (TVer/SVOD), global IP monetization, and non-broadcasting structures across Japan's Top 5 commercial television networks (Nippon TV HD, TV Asahi HD, TBS HD, TV Tokyo HD, and Fuji Media HD) from FY2015 to FY2035.
 
 ---
