@@ -20,6 +20,22 @@ An interactive financial intelligence simulation dashboard analyzing the long-te
 
 ---
 
+## 🌐 v2.00「民放の事業シフト 2015→2035」（三弁図ダッシュボード）
+
+民放キー局5社（日本テレビHD・テレビ朝日HD・TBS HD・テレビ東京HD・フジ・メディアHD）の売上を「放送」「コンテンツ・IP」「放送外」の3つの円で描き、2015〜2026年3月期の開示実績と、その伸び方が2035年3月期まで続いた場合の延長線（予測ではありません）を並べます。
+
+ブラウザ上でインストール不要・完全スタンドアロンで動作します：
+👉 **[v2.00 Live Dashboard を開く（GitHub Pages）](https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/)**
+
+[![Dashboard Preview v2.00](v2/social-preview.png)](https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/)
+
+- 出典：各社の有価証券報告書・決算短信・決算説明資料（資料名・頁はダッシュボードの「補足・出典」タブの出典表）
+- 単位：百万円（円の中の数字は億円）
+- 2027〜2035年3月期は、過去の伸び率が続いた場合の延長線です。各社の業績予想・中期経営計画は延長線と並べて比べるだけで、計算には使っていません。
+- v1.x（TV-Shift 2035：民放5社 収益構造転換シミュレーション）は従来どおり https://naohisastry.github.io/japan-commercial-tv-shift-2035/ で公開を続けます。
+
+---
+
 ## 🔑 Keywords
 
 Japan Commercial TV, Broadcasters, Terrestrial Linear TV, TVer, Streaming Wars, Hulu Japan, FOD, TELASA, U-NEXT, Paravi, Anime IP Licensing, Studio Ghibli, NARUTO, Non-Broadcasting, Real Estate Synergy, Differential Modeling, Financial Simulation, Market Intelligence, Chart.js, Dynamic Venn Diagram.
