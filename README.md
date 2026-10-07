@@ -36,6 +36,22 @@ An interactive financial intelligence simulation dashboard analyzing the long-te
 
 ---
 
+## 🌐 v2.01 English edition — Japan's Commercial TV Business Shift 2015→2035
+
+An interactive dashboard that draws the revenue of Japan's five key commercial broadcasters (Nippon TV, TV Asahi, TBS, TV Tokyo, Fuji Media) as three circles — Broadcasting, Content & IP and Non-broadcast — comparing disclosed results for FY3/15–FY3/26 with a trend extension to FY3/35 that assumes past growth continues (not a forecast).
+
+Runs in the browser with no installation:
+👉 **[Open the English dashboard (GitHub Pages)](https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/en/)**
+
+[![Dashboard Preview v2.01 English](v2/en/social-preview.png)](https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/en/)
+
+- Sources: each company's Annual Securities Report (有価証券報告書, Yuho), Earnings Release (決算短信, Tanshin) and earnings presentation materials (決算説明資料). Document names and pages are in the source table on the “Method & sources” tab.
+- Unit: ¥ billion. FY3/26 = fiscal year ended March 31, 2026.
+- Company plans are shown next to the extension for comparison only; they are not used to build it.
+- Translated from the Japanese edition (https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/); where they differ, the Japanese edition prevails.
+
+---
+
 ## 🔑 Keywords
 
 Japan Commercial TV, Broadcasters, Terrestrial Linear TV, TVer, Streaming Wars, Hulu Japan, FOD, TELASA, U-NEXT, Paravi, Anime IP Licensing, Studio Ghibli, NARUTO, Non-Broadcasting, Real Estate Synergy, Differential Modeling, Financial Simulation, Market Intelligence, Chart.js, Dynamic Venn Diagram.
