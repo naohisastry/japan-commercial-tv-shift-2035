@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Japan's Commercial TV Business Shift 2015→2035 Ver 2.01</title>
+<title>Japan's Commercial TV Business Shift 2015→2035 Ver 2.02</title>
 <link rel="alternate" hreflang="ja" href="https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/">
 <link rel="alternate" hreflang="en" href="https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/en/">
 <link rel="alternate" hreflang="x-default" href="https://naohisastry.github.io/japan-commercial-tv-shift-2035/v2/">
@@ -115,6 +115,16 @@ h3{font-size:14px;font-weight:700}
 .hl dt{color:var(--muted)} .hl dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 .hl .hlh{grid-column:1/-1;font-size:11px;color:var(--muted);cursor:help;border-bottom:1px dotted var(--line);padding-bottom:2px;margin-bottom:2px}
 .hl .note{grid-column:1/-1;color:var(--warn);font-size:11px;line-height:1.4}
+.agg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:760px){.agg{grid-template-columns:1fr}}
+.agg svg{height:auto;display:block;max-width:100%;margin:0 auto}
+.agg .hd{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.agg .nm{font-family:var(--f-display);font-weight:900;font-size:18px}
+.agg .tot{font-size:13px;color:var(--fg2)}
+.agg .hl{font-size:12.5px}
+.contrib h3{font-size:12.5px;color:var(--fg2);font-weight:700;margin:4px 0 2px}
+.contrib svg text{pointer-events:none}
+.contrib svg{width:100%;max-width:560px;height:auto;display:block}
 section.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
 .sub{color:var(--fg2);font-size:13px;margin:0;max-width:80ch}
 .bars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
@@ -172,11 +182,11 @@ td.na{color:var(--muted)}
         <h1><span class="gradient-title">Japan's Commercial TV Business Shift 2015→2035</span></h1>
         <p class="header-desc">As terrestrial TV advertising stalls, how have Japan's five key commercial broadcasters changed what their revenue is made of? Each group's revenue is drawn as three circles — Broadcasting, Content &amp; IP and Non-broadcast — with disclosed results for FY3/15–FY3/26 alongside a trend extension to FY3/35 that assumes past growth continues (not a forecast). Use it to see how far each broadcaster has built ways of earning beyond broadcasting, and how they differ.</p>
       </div>
-      <div class="header-version"><span class="version-tag">Ver 2.01</span><span class="version-date">2026.10</span><span class="lang-switch"><a href="../" hreflang="ja" lang="ja">日本語</a>｜<b lang="en">English</b></span></div>
+      <div class="header-version"><span class="version-tag">Ver 2.02</span><span class="version-date">2026.10</span><span class="lang-switch"><a href="../" hreflang="ja" lang="ja">日本語</a>｜<b lang="en">English</b></span></div>
     </div>
     <div class="header-row-nav">
       <nav class="nav-tabs" role="tablist" aria-label="Switch view">
-        <button type="button" class="nav-tab-btn" role="tab" id="tab-main" aria-selected="true" aria-controls="pane-main"><span class="tab-dot"></span>① Three circles &amp; changes</button>
+        <button type="button" class="nav-tab-btn" role="tab" id="tab-main" aria-selected="true" aria-controls="pane-main"><span class="tab-dot"></span>① Revenue mix and change at the five broadcasters (2015→2035)</button>
         <button type="button" class="nav-tab-btn" role="tab" id="tab-ref" aria-selected="false" aria-controls="pane-ref"><span class="tab-dot"></span>② Method &amp; sources (how extensions are built / company plans / source table)</button>
       </nav>
     </div>
@@ -192,10 +202,10 @@ td.na{color:var(--muted)}
     <input id="year" type="range" min="2015" max="2035" step="1" value="2026" aria-label="Fiscal year">
     <div class="scen-row"><span class="status">Extension scenario (how fast terrestrial advertising declines and how much of it streaming advertising wins back, based on overseas cases):</span>
     <span class="seg" role="group" aria-label="Scenario" id="scen">
-      <button type="button" data-s="JAPAN_BASE" aria-pressed="true" data-tip="Gradual decline · about 70% won back<br>Terrestrial −1.0% a year / recapture rate 65%<br>Basis: Dentsu, Advertising Expenditures in Japan, 2019→2025">Status quo (Japan baseline)</button>
-      <button type="button" data-s="FRANCE" aria-pressed="false" data-tip="Moderate decline · about 60% won back<br>Terrestrial −2.5% a year / recapture rate 64%<br>Basis: estimate from French advertising statistics">Accelerated shift (France model)</button>
-      <button type="button" data-s="UK" aria-pressed="false" data-tip="Steep decline · about 80% won back<br>Terrestrial −4.4% a year / recapture rate 83%<br>Basis: Ofcom Media Nations 2026 (includes revenue earned on YouTube)">Successful streaming shift (UK model)</button>
-      <button type="button" data-s="GERMANY" aria-pressed="false" data-tip="Steep decline · only about 20% won back<br>Terrestrial −4.7% a year / recapture rate 19%<br>Basis: German advertising association ZAW and one major broadcaster (recapture rate is that one company's figure)">Failed streaming shift (Germany model)</button>
+      <button type="button" data-s="JAPAN_BASE" aria-pressed="true" data-tip="A scenario in which the terrestrial advertising market shrinks gradually by 1.0% a year, and broadcasters' streaming advertising wins back 65% (about 70%) of what is lost.<br>Basis: Dentsu, Advertising Expenditures in Japan, actuals 2019→2025">Status quo (Japan baseline)</button>
+      <button type="button" data-s="FRANCE" aria-pressed="false" data-tip="A scenario in which the terrestrial advertising market shrinks by 2.5% a year, and broadcasters' streaming advertising wins back 64% (about 60%) of what is lost.<br>Basis: estimate from French advertising statistics">Accelerated shift (France model)</button>
+      <button type="button" data-s="UK" aria-pressed="false" data-tip="A scenario in which the terrestrial advertising market shrinks quickly, by 4.4% a year, and broadcasters' streaming advertising wins back 83% (about 80%) of what is lost.<br>Basis: Ofcom (the UK communications regulator), Media Nations 2026 (includes revenue earned on YouTube)">Successful streaming shift (UK model)</button>
+      <button type="button" data-s="GERMANY" aria-pressed="false" data-tip="A scenario in which the terrestrial advertising market shrinks quickly, by 4.7% a year, and broadcasters' streaming advertising wins back only 19% (about 20%) of what is lost.<br>Basis: German advertising association ZAW and one major broadcaster (the share won back is that one company's figure)">Failed streaming shift (Germany model)</button>
     </span></div>
     <p class="scen-note">Only two things change between scenarios: terrestrial revenue within Broadcasting, and the overlap (broadcasters' streaming advertising). BS, radio, Content &amp; IP, Non-broadcast and all results for FY3/15–FY3/26 are the same in every scenario (as is the assumption that Fuji recovers within three years). <b>Revenue won back through streaming falls inside Content &amp; IP (the overlap), so it does not add to the total. The difference in totals between scenarios equals the difference in terrestrial revenue.</b></p>
   </div>
@@ -207,6 +217,20 @@ td.na{color:var(--muted)}
     <span><i class="sw" style="background:var(--c3-fill);border-color:var(--c3)"></i>Non-broadcast (distance = profit support)</span>
     <span><i class="sw" style="background:transparent;border-color:var(--fg2);border-style:dashed"></i>Extension years (dashed, light fill) / dashed rings outside a circle = range if growth were at the 25th–75th percentile</span>
   </div>
+
+  <section class="card" aria-labelledby="h-agg">
+    <h2 id="h-agg">Five broadcasters combined: what the industry's revenue is made of</h2>
+    <div class="agg">
+      <div><svg id="s-agg" role="img" aria-label="Three circles: five broadcasters combined"></svg></div>
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+        <div class="hd"><span class="nm">Five combined</span><span class="tot num" id="t-agg"></span></div>
+        <div class="chips" id="m-agg"></div>
+        <dl class="hl" id="h-agg-hl"></dl>
+        <div class="contrib"><h3 id="c-agg-h">Change in consolidated revenue by broadcaster (combined FY3/15 = 100)</h3><div id="c-agg"></div></div>
+      </div>
+    </div>
+    <p class="sub">The sum of the five broadcasters. The circles use the same scale as the broadcasters below (area = revenue). The overlap (digital revenue) is drawn only from FY3/24, when all five disclose it. Extension years are the sum of each broadcaster's extension (median); the growth ranges cannot be added, so they are not drawn. In the extension, Fuji's share recovery is a transfer from the other four, so it does not affect combined terrestrial revenue.</p>
+  </section>
 
   <div class="grid5" id="panels" role="tablist" aria-label="Five broadcasters"></div>
 
@@ -294,6 +318,7 @@ td.na{color:var(--muted)}
         <li>The accounting change reduced reported revenue, but the figures have not been adjusted. Its effect is disclosed only by business segment, so it is not known how much fell on Broadcasting versus Content &amp; IP.</li>
         <li>The profit used to position the Non-broadcast circle is disclosed by segment. For CX the segment's scope does not match Non-broadcast. Years positioned by a loss are CX FY3/25 and FY3/26 (broadcasting and programming side in loss) and NTV FY3/21 (Non-broadcast in loss).</li>
         <li>The classification of shopping businesses is this dashboard's judgment based on each company's business descriptions. At EX and TX shopping is mainly TV shopping, so Non-broadcast is zero.</li>
+        <li>The five-broadcaster total is the sum of the five. The overlap is drawn only from FY3/24, when all five disclose digital revenue. The Non-broadcast distance is Non-broadcast-side profit of the three broadcasters with a Non-broadcast circle (NTV, TBS, CX) ÷ total profit of the five (EX's and TX's Non-broadcast-side segment profit is counted on the Content &amp; IP side).</li>
         <li>Years excluded from the extension and other broadcaster-specific treatments are listed under “How extensions are built” on the “Method &amp; sources” tab.</li>
       </ul></div>
     </div>
@@ -307,7 +332,7 @@ td.na{color:var(--muted)}
     <select id="ref-year" aria-label="Source table year"></select>
     <span class="status">Extension compared with company plans:</span>
     <select id="ref-scen" aria-label="Extension scenario"></select>
-    <p class="scen-note">Selections on this tab are independent of the “Three circles &amp; changes” tab.</p>
+    <p class="scen-note">Selections on this tab are independent of the “Revenue mix and change” tab.</p>
   </div>
   <section class="card" aria-labelledby="h-meth">
     <h2 id="h-meth">How extensions are built (differences by broadcaster)</h2>
@@ -775,12 +800,133 @@ function scenTips(){
     btn.dataset.tip = t;
   });
 }
-function render(){ scenTips();
+function render(){
   const yl = document.getElementById('ylabel'); yl.textContent = fy(state.year)+(state.year>2026?' (extension)':''); yl.style.color = state.year>2026 ? 'var(--warn)' : '';
   document.getElementById('year').value = state.year;
   CO.forEach(c=>drawPanel(c.id));
+  drawAgg();
   drawDetail();
 }
+
+/* ---- five-broadcaster total ---- */
+const AGG_KEYS = ['circle1','circle2','circle3','segment_external_total','terrestrial','bs','radio'];
+function aggRow(y, sc=state.scenario){
+  const rs = CO.map(c => y>2026 ? extRow(c.id,y,sc) : row(c.id,y));
+  const o = {fy:y, ext:y>2026, rows:rs};
+  AGG_KEYS.forEach(k => o[k] = rs.reduce((a,r)=>a+(r[k]||0),0));
+  o.allDigital = rs.every(hasDigital);
+  o.digital_total = o.allDigital ? rs.reduce((a,r)=>a+r.digital_total,0) : null;
+  o.digital_status = o.allDigital ? 'COMPLETE' : 'NOT_DISCLOSED';
+  // Non-broadcast distance: Non-broadcast-side profit of NTV, TBS and CX ÷ total profit of the five
+  const pr = (yy) => { const q = CO.map(c => row(c.id,yy));
+    const non = q.reduce((a,r)=>a+(r.circle3>0 ? (r.profit_non_media||0) : 0),0);
+    const all = q.reduce((a,r)=>a+(r.profit_media||0)+(r.profit_non_media||0),0);
+    const med = all - non;
+    return med<=0 ? {status:'MEDIA_LOSS_TOUCH', ratio:null, non, med} : (non<=0 ? {status:'NON_MEDIA_LOSS', ratio:null, non, med} : {status:'OK', ratio:non/all, non, med}); };
+  const p = pr(y>2026 ? 2026 : y); o.profit_status=p.status; o.profit_ratio=p.ratio; o.profit_non=p.non; o.profit_med=p.med;
+  return o;
+}
+const G_AGG = G*2;
+let AGG_W=0, AGG_H=0;
+(function(){ const sq=Math.sqrt(S); let mw=0, mh=0, mb=0;
+  const ys=[]; for(let y=2015;y<=2035;y++) ys.push(y);
+  Object.keys(EXT).forEach(sc => ys.forEach(y => { if (y<=2026 && sc!=='JAPAN_BASE') return; const a=aggRow(y,sc); const g=geom(a,S);
+    mw=Math.max(mw,g.r1+g.d+g.r2); mh=Math.max(mh,g.r1,g.r2);
+    const gap = a.profit_status==='MEDIA_LOSS_TOUCH'?0:(a.profit_status==='NON_MEDIA_LOSS'?G_AGG:G_AGG*(1-(a.profit_ratio||0)));
+    mb=Math.max(mb, Math.max(g.r1,g.r2) + gap + 2*g.r3); }));
+  AGG_W = Math.ceil(mw + 2*PAD + 140); AGG_H = Math.ceil(PAD + 16 + mh + mb + 10); window.__AGG_MH = mh; })();
+function aggCum(y, sc=state.scenario){  // change from FY3/15 excluding amounts moved by restatements
+  const s={c1:0,c2:0,c3:0};
+  CO.forEach(c => { deltas(c.id).forEach(o => { if (o.y<=Math.min(y,2026)){ s.c1+=o.c1; s.c2+=o.c2; s.c3+=o.c3; } });
+    if (y>2026){ const b=row(c.id,2026,false), e=extRow(c.id,y,sc); s.c1+=e.circle1-b.circle1; s.c2+=e.circle2-b.circle2; s.c3+=e.circle3-b.circle3; } });
+  return s;
+}
+function drawAgg(){
+  const a = aggRow(state.year), svg = document.getElementById('s-agg');
+  const base = CO.reduce((acc,c)=>acc+row(c.id,2015,false).segment_external_total,0);
+  document.getElementById('t-agg').textContent = 'Consolidated ¥'+oku(a.segment_external_total)+'bn';
+  svg.setAttribute('viewBox', `0 0 ${AGG_W} ${AGG_H}`);
+  // same scale as the broadcaster panels
+  const ps = document.getElementById('s-NTV'), k = ps ? ps.getBoundingClientRect().width / W : 1;
+  svg.style.width = Math.round(AGG_W*k)+'px';
+  const g = geom(a,S), D=g.D, X=a.ext, dash = X ? ' stroke-dasharray="5 3" fill-opacity="0.55"' : '';
+  const cy = PAD + 16 + window.__AGG_MH;
+  const x1 = AGG_W/2 - (g.r1+g.d+g.r2)/2 + g.r1, x2 = x1+g.d;
+  let s = '';
+  s += `<circle cx="${x1}" cy="${cy}" r="${g.r1}" fill="var(--c1-fill)" stroke="var(--c1)" stroke-width="1.5"${dash}/>`;
+  s += `<circle cx="${x2}" cy="${cy}" r="${g.r2}" fill="var(--c2-fill)" stroke="var(--c2)" stroke-width="1.5"${dash}/>`;
+  if (D>0){
+    const aa = (g.d*g.d + g.r1*g.r1 - g.r2*g.r2)/(2*g.d), h = Math.sqrt(Math.max(0,g.r1*g.r1-aa*aa));
+    const L1 = aa<0?1:0, L2 = aa>g.d?1:0;
+    s += `<path d="M${x1+aa} ${cy-h} A${g.r1} ${g.r1} 0 ${L1} 1 ${x1+aa} ${cy+h} A${g.r2} ${g.r2} 0 ${L2} 1 ${x1+aa} ${cy-h}Z" fill="var(--ov-fill)" stroke="var(--ov)" stroke-width="1.5"${dash}/>`;
+    s += `<text x="${x1+aa}" y="${cy-Math.max(g.r1,g.r2)-6}" text-anchor="middle" font-size="12" style="fill:var(--ov)">Digital ${oku(D)}</text>`;
+  } else {
+    const tx = x1+g.r1;
+    s += `<path d="M${tx} ${cy-20} A${g.r1} ${g.r1} 0 0 1 ${tx} ${cy+20}" fill="none" stroke="var(--fg2)" stroke-width="1.5" stroke-dasharray="3 3"/>`;
+    s += `<text x="${tx}" y="${cy-Math.max(g.r1,g.r2)-6}" text-anchor="middle" font-size="11">Digital: not drawn before FY3/24 (not disclosed by all five)</text>`;
+  }
+  s += `<text x="${x1}" y="${cy-4}" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--c1)">${oku(a.circle1)}</text>`;
+  s += `<text x="${x1}" y="${cy+13}" text-anchor="middle" font-size="11">Broadcasting (excl. overlap)</text>`;
+  s += `<text x="${x2+(D>0?g.r2*0.2:0)}" y="${cy-4}" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--c2)">${oku(a.circle2)}</text>`;
+  s += `<text x="${x2+(D>0?g.r2*0.2:0)}" y="${cy+13}" text-anchor="middle" font-size="11">Content &amp; IP</text>`;
+  const bottom = cy + Math.max(g.r1,g.r2), mid = (x1-g.r1 + x2+g.r2)/2;
+  let gap, flag='';
+  if (a.profit_status==='MEDIA_LOSS_TOUCH'){ gap=0; flag='Broadcasting/programming side in loss'; }
+  else if (a.profit_status==='NON_MEDIA_LOSS'){ gap=G_AGG; flag='Non-broadcast in loss'; }
+  else gap = G_AGG*(1-a.profit_ratio);
+  const c3y = bottom + gap + g.r3;
+  s += `<line x1="${mid}" y1="${bottom}" x2="${mid}" y2="${c3y-g.r3}" stroke="var(--c3)" stroke-width="1" stroke-dasharray="2 2"/>`;
+  s += `<circle cx="${mid}" cy="${c3y}" r="${g.r3}" fill="var(--c3-fill)" stroke="var(--c3)" stroke-width="1.5"${dash}/>`;
+  s += `<text x="${mid}" y="${c3y+5}" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--c3)">${oku(a.circle3)}</text>`;
+  const lab = (flag ? '✚ '+flag : Math.round(a.profit_ratio*100)+'% of profit') + (X ? ' · distance fixed' : '');
+  s += `<text x="${mid+8}" y="${bottom + Math.max(gap/2+4, 13)}" font-size="12" style="fill:${flag?'var(--warn)':'var(--c3)'}">${lab}</text>`;
+  svg.innerHTML = s;
+  // marks
+  const ms=[];
+  if (X) ms.push(`<span class="chip w">Extension · ${SCEN_JA[state.scenario]} (sum of the five medians)</span>`);
+  if (state.year===2019 || state.year===2020) ms.push(`<span class="chip w">Includes a restatement year (${state.year===2019?'CX':'TBS'})</span>`);
+  if (state.year>=2022) ms.push('<span class="chip">After the new revenue recognition standard</span>');
+  document.getElementById('m-agg').innerHTML = ms.join('');
+  // headline
+  const el = document.getElementById('h-agg-hl');
+  const pt = v => (v>=0?'+':'−')+Math.abs(v/base*100).toFixed(1)+'pt';
+  if (state.year===2015){ el.innerHTML = '<dt>Base year</dt><dd>FY3/15</dd>'; }
+  else {
+    const c = aggCum(state.year);
+    let h = `<span class="hlh" data-tip="Change with the five broadcasters' combined FY3/15 consolidated revenue set to 100 (contribution). Amounts moved between circles by segment restatements are excluded (TBS FY3/20, CX FY3/19). The three add up to the change in combined consolidated revenue.">Change vs FY3/15 (combined FY3/15 consolidated revenue = 100)</span>`;
+    h += `<dt>Broadcasting</dt><dd>${pt(c.c1)}</dd><dt>Content &amp; IP</dt><dd>${pt(c.c2)}</dd><dt>Non-broadcast</dt><dd>${pt(c.c3)}</dd>`;
+    h += `<dt>Consolidated</dt><dd>${(a.segment_external_total>=base?'+':'−')+Math.abs((a.segment_external_total/base-1)*100).toFixed(1)}%</dd>`;
+    const notes=[];
+    if (X) notes.push(`Extension (${SCEN_JA[state.scenario]}). Not a forecast`);
+    notes.push('Change excluding amounts moved between circles by restatements (TBS FY3/20, CX FY3/19)');
+    if (state.year>=2019) notes.push('Until FY3/18, CX\'s Non-broadcast was its whole lifestyle information segment (different scope)');
+    el.innerHTML = h + notes.map(n=>`<span class="note">${n}</span>`).join('');
+  }
+  // contribution by broadcaster
+  const host = document.getElementById('c-agg');
+  if (state.year===2015){ host.innerHTML = '<p class="sub" style="font-size:12px">FY3/15 is the base year. Move the year to see how much of the combined change each broadcaster accounts for.</p>'; return; }
+  const items = CO.map(c => ({id:c.id, v:(row(c.id,state.year).segment_external_total - row(c.id,2015,false).segment_external_total)/base*100}));
+  const pos = items.filter(i=>i.v>0), neg = items.filter(i=>i.v<0);
+  const P = pos.reduce((a,i)=>a+i.v,0), N = neg.reduce((a,i)=>a+i.v,0);
+  const span = Math.max(P - N, 1e-9), BW=520, BH=58, ml=8, mr=8, top=14, bh=22;
+  const xs = v => ml + (v - N)/span*(BW-ml-mr);
+  const shade = ['var(--fg2)','var(--muted)'];
+  let b = `<svg viewBox="0 0 ${BW} ${BH}" role="img" aria-label="Contribution by broadcaster">`;
+  let acc = 0;
+  pos.sort((p,q)=>q.v-p.v).forEach((i,k) => { const x0=xs(acc), x1=xs(acc+i.v); acc+=i.v;
+    b += `<rect x="${x0}" y="${top}" width="${Math.max(x1-x0-1,0.5)}" height="${bh}" rx="2" fill="${shade[k%2]}" fill-opacity="0.35" stroke="var(--fg2)" stroke-width="0.8" data-tip="${i.id}: ${(i.v>=0?'+':'−')+Math.abs(i.v).toFixed(1)}pt of the combined change"/>`;
+    if (x1-x0>34) b += `<text x="${(x0+x1)/2}" y="${top+bh/2+4}" text-anchor="middle" font-size="11" style="fill:var(--fg)">${i.id} +${i.v.toFixed(1)}</text>`; });
+  acc = 0;
+  neg.sort((p,q)=>p.v-q.v).forEach(i => { const x1=xs(acc), x0=xs(acc+i.v); acc+=i.v;
+    b += `<rect x="${x0}" y="${top}" width="${Math.max(x1-x0-1,0.5)}" height="${bh}" rx="2" fill="var(--warn)" fill-opacity="0.3" stroke="var(--warn)" stroke-width="0.8" data-tip="${i.id}: <b>−</b>${Math.abs(i.v).toFixed(1)}pt of the combined change"/>`;
+    if (x1-x0>34) b += `<text x="${(x0+x1)/2}" y="${top+bh/2+4}" text-anchor="middle" font-size="11" style="fill:var(--warn)">${i.id} <tspan font-weight="800">−</tspan>${Math.abs(i.v).toFixed(1)}</text>`; });
+  b += `<line x1="${xs(0)}" x2="${xs(0)}" y1="${top-6}" y2="${top+bh+6}" stroke="var(--fg)" stroke-width="1.2"/>`;
+  b += `<text x="${xs(0)}" y="${top-4}" text-anchor="middle" font-size="10" style="fill:var(--muted)">0</text>`;
+  const tot = P+N;
+  b += `<text x="${BW-mr}" y="${BH-4}" text-anchor="end" font-size="11" style="fill:var(--fg2)">Five combined ${(tot>=0?'+':'−')+Math.abs(tot).toFixed(1)}pt (increases right / decreases left)</text></svg>`;
+  host.innerHTML = b;
+}
+addEventListener('resize',()=>drawAgg());
 function select(co){
   state.sel=co;
   CO.forEach(c=>document.getElementById('p-'+c.id).setAttribute('aria-selected', c.id===co));
